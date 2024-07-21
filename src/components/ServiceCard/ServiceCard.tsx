@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { TriangleAlert } from "lucide-react";
 
 import { MonitorCheck, MonitorStop } from "lucide-react";
 interface ServiceCardProps {
@@ -32,13 +33,19 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
       </CardHeader>
       <CardContent className="flex flex-col flex-grow justify-between gap-2">
         <div className="flex flex-col items-center">
-          <Image
-            src={service.logo_path ?? "/logo.svg"}
-            priority
-            width={150}
-            height={150}
-            alt="logo"
-          />
+          <div className="relative w-150 h-150">
+            <Image
+              src={service.logo_path ?? "/not_found.svg"}
+              priority
+              width={150}
+              height={150}
+              alt="logo"
+              // className="object-contain"
+              // onError={(e) => {
+              //   e.currentTarget.src = "/not_found.svg";
+              // }}
+            />
+          </div>
         </div>
         <div className="mt-auto flex justify-center">
           <ServiceDrawer service={service} />

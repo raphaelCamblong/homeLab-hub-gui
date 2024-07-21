@@ -6,11 +6,12 @@ import {
   Drawer,
   DrawerTrigger,
   DrawerClose,
+  DrawerDescription,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { BookUser, CircleX, Forward } from "lucide-react";
+import { ListPlus, Forward, CircleDot, CircleDotDashed } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
@@ -28,14 +29,19 @@ const ServiceDrawer: React.FC<ServiceDrawerProps> = ({ service }) => {
     <Drawer>
       <DrawerTrigger asChild>
         <Button>
-          <BookUser />
+          <ListPlus />
           See more
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle className="flex flex-row justify-between">
+          <DrawerTitle className="flex flex-row items-center gap-2 font-ppneuemachina">
             {service.name}
+            {service.state === "running" ? (
+              <CircleDot color="green" aria-label="Running" />
+            ) : (
+              <CircleDotDashed color="red" aria-label="Stopped" />
+            )}
           </DrawerTitle>
         </DrawerHeader>
         <div className="flex flex-col gap-2 p-2">
@@ -45,8 +51,6 @@ const ServiceDrawer: React.FC<ServiceDrawerProps> = ({ service }) => {
           </Button>
           <Separator />
           <p>Description: {service.description}</p>
-          <Separator />
-          <p>State: {service.state}</p>
           <Separator />
           <p>Created at: {service.createdAt}</p>
           <p>Updated at: {service.updatedAt}</p>
@@ -60,6 +64,7 @@ const ServiceDrawer: React.FC<ServiceDrawerProps> = ({ service }) => {
           </div>
         </div>
       </DrawerContent>
+      <DrawerDescription></DrawerDescription>
     </Drawer>
   );
 };
