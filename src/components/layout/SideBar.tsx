@@ -7,9 +7,10 @@ import {
   SheetFooter,
   SheetHeader,
   SheetTitle,
+  SheetDescription,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Cloud, Keyboard, Menu, Settings } from "lucide-react";
 
 interface SideBarRoute {
@@ -20,6 +21,7 @@ interface SideBarRoute {
 
 export const Sidebar = () => {
   const router = useRouter();
+  const pathName = usePathname();
 
   const routesItems: SideBarRoute[] = [
     {
@@ -30,7 +32,7 @@ export const Sidebar = () => {
     {
       path: "/service",
       icon: <Keyboard />,
-      name: "Services",
+      name: "Service",
     },
   ];
 
@@ -38,22 +40,27 @@ export const Sidebar = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          variant="outline"
+          variant="ghost"
           aria-label="Open Sidebar"
           className="hover:scale-110 hover:rotate-6"
         >
           <Menu />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[200px] sm:w-[240px]">
-        <SheetTitle>Hub</SheetTitle>
-        <div className="space-y-4">
+      <SheetContent
+        side="left"
+        className="flex flex-col w-[200px] sm:w-[240px]"
+      >
+        <SheetHeader className="flex justify-center items-center">
+          <SheetTitle className="font-ppneuemachina">HUB</SheetTitle>
+        </SheetHeader>
+        <div className="flex flex-col flex-grow gap-0">
           {routesItems.map((route) => (
             <Button
               key={route.name}
-              variant="ghost"
+              variant={pathName == route.path ? "secondary" : "ghost"}
               onClick={() => router.push(route.path)}
-              className="flex items-center space-x-6"
+              className="flex items-center space-between gap-2 w-full text-right"
             >
               {route.icon}
               <p>{route.name}</p>
@@ -66,6 +73,7 @@ export const Sidebar = () => {
           </Button>
         </SheetFooter>
       </SheetContent>
+      <SheetDescription></SheetDescription>
     </Sheet>
   );
 };
