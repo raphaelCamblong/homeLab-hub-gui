@@ -36,3 +36,9 @@ body {
   font-family: 'PPNeueMachina', sans-serif;
 }
 
+@layer base {
+  body {
+    @apply font-ppneuemachina;
+  }
+}
+
