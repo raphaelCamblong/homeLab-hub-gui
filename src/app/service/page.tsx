@@ -1,72 +1,71 @@
 "use client";
-import React from "react";
+import React, { use, useCallback, useMemo } from "react";
 import { ServiceCard } from "@/components/ServiceCard";
 import { Separator } from "@/components/ui/separator";
 import { useService } from "@/services/api/hooks/useService";
 import { Loader } from "lucide-react";
+import { Services, ServiceState } from "@/services/api/types/Service";
+import useFilters, { Filter } from "@/lib/useFilters";
+import ServiceFilters from "./filters";
+import { Button } from "@/components/ui/button";
+
+export interface ServiceFilterItems extends Filter {
+  tags: string[];
+  state: ServiceState[];
+}
 
 interface ServiceProps {
   name: string;
 }
 
+function getAllTags(services: Services): string[] {
+  if (!services) {
+    return [];
+  }
+  const tagsSet = new Set<string>();
+  services.forEach((service) => {
+    service.tags.forEach((tag) => {
+      tagsSet.add(tag);
+    });
+  });
+  return Array.from(tagsSet);
+}
+
 const Service: React.FC<ServiceProps> = ({ name }) => {
   const { services, isError, isLoading } = useService();
-  // const services: ServiceModel[] = [
-  //   {
-  //     id: "grafana",
-  //     name: "Grafana",
-  //     url: "https://grafana.example.com",
-  //     logo_path: getIconSvg("grafana"),
-  //     description: "Cluster dashboard and metrics",
-  //     tags: ["monitoring"],
-  //     state: "running",
-  //   },
-  //   {
-  //     id: "k3s",
-  //     name: "K3S",
-  //     url: "https://k3s.example.com",
-  //     logo_path: getIconSvg("k3s"),
-  //     description: "Service 2 description",
-  //     tags: ["node", "kubernetes"],
-  //     state: "stopped",
-  //   },
-  //   {
-  //     id: "prometheus",
-  //     name: "Prometheus",
-  //     url: "",
-  //     logo_path: getIconSvg("prometheus"),
-  //     description: "Cluster monitoring and alerting",
-  //     tags: ["node", "monitoring", "alerting", "kubernetes", "prometheus"],
-  //     state: "stopped",
-  //   },
-  //   {
-  //     id: "argocd",
-  //     name: "ArgoCD",
-  //     url: "",
-  //     logo_path: getIconSvg("argocd"),
-  //     description: "GitOps for kubernetes",
-  //     tags: ["node", "kubernetes", "gitops", "ci/cd"],
-  //     state: "running",
-  //   },
-  //   {
-  //     id: "homekit",
-  //     name: "HomeKit",
-  //     url: "",
-  //     logo_path: getIconSvg("homekit"),
-  //     description: "HomeKit automation by Apple",
-  //     tags: ["homekit", "automation"],
-  //     state: "stopped",
-  //   },
-  // ];
+  const [filters, setFilters, resetFilter] = useFilters<ServiceFilterItems>({
+    tags: [],
+    state: [ServiceState.Running, ServiceState.Stopped],
+  });
+
+  const allTags = useMemo(() => {
+    return getAllTags(services as Services);
+  }, [services]);
+
+  const filersService = useMemo(() => {
+    return services
+      ?.filter(
+        (service) => service.state && filters.state.includes(service.state)
+      )
+      .filter((service) => {
+        return filters.tags.length === 0;
+      });
+  }, [services, filters]);
 
   return (
     <div className="flex flex-col gap-4">
-      <h2>Service</h2>
+      <h1 className="font-ppneuemachina text-3xl">Service</h1>
+      <ServiceFilters
+        availableTags={allTags}
+        filters={filters}
+        setFilters={setFilters}
+        resetFilter={resetFilter}
+      />
       <Separator />
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {isLoading && <Loader />}
         {isError && <div>{isError}</div>}
-        {services?.map((service) => (
+        {filersService?.map((service) => (
           <ServiceCard key={service.name} service={service} />
         ))}
       </div>
