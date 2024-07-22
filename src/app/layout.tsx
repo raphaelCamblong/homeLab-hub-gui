@@ -24,10 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="h-screen flex flex-col">
-          <header className="sticky top-0 bg-regal-blue/80 z-10 flex flex-row justify-between items-center p-4 shadow-lg">
+          <header className="sticky top-0 z-10 flex flex-row justify-between items-center p-4 shadow-lg bg-gradient-to-r from-regal-blue">
             <Sidebar />
             <div className="flex-grow text-center">
-              <h3 className="font-ppneuemachina">Home Lab</h3>
+              <h3 className="font-ppneuemachina text-3xl">HomeLab</h3>
             </div>
             <div className="w-0"></div>
           </header>
