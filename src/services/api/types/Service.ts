@@ -1,3 +1,5 @@
+export type Services = Service[];
+
 export interface Service {
     id: string;
     name: string;
@@ -5,7 +7,12 @@ export interface Service {
     description: string;
     tags: string[];
     logo_path?: string;
-    state?: "running" | "stopped";
+    state?: ServiceState;
     createdAt?: string;
     updatedAt?: string;
+}
+
+export enum ServiceState {
+    Running = "running",
+    Stopped = "stopped"
 }
