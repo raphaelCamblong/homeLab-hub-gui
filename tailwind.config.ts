@@ -39,7 +39,9 @@ const config = {
         ppneuemachina: ['PPNeueMachina', 'sans-serif'],
       },
       colors: {
-        'regal-blue': '#a5b4fc'
+        'regal-blue': '#a5b4fc',
+        'green-pastel': '#77DD76',
+        'red-pastel': '#FF6962',
       },
     },
   },
