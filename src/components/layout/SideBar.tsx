@@ -1,79 +1,90 @@
 "use client";
-import React, { useState } from "react";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { usePathname, useRouter } from "next/navigation";
-import { Cloud, Keyboard, Menu, Settings } from "lucide-react";
+import { Cloud, Cable, Bot, Settings, Bell, MemoryStick } from "lucide-react";
 
-interface SideBarRoute {
-  path: string;
-  icon: React.ReactNode;
-  name: string;
-}
+import React, { useMemo, useState } from "react";
+import { Sidebar, SidebarBody, SidebarLink, Links } from "../ui/sidebar";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
+import path from "path";
 
-export const Sidebar = () => {
-  const router = useRouter();
+export function AppSidebar({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
 
-  const routesItems: SideBarRoute[] = [
-    {
-      path: "/cluster",
-      icon: <Cloud />,
-      name: "Cluster info",
-    },
-    {
-      path: "/service",
-      icon: <Keyboard />,
-      name: "Service",
-    },
-  ];
+  const iconclassName = " h-5 w-5 flex-shrink-0";
 
+  const links: Links[] = useMemo(
+    () => [
+      {
+        icon: <MemoryStick className={iconclassName} />,
+        label: "Server Status",
+        href: "/server",
+      },
+      {
+        icon: <Cloud className={iconclassName} />,
+        label: "Cluster info",
+        href: "/cluster",
+      },
+      {
+        icon: <Cable className={iconclassName} />,
+        label: "Services",
+        href: "/service",
+      },
+      {
+        icon: <Bell className={iconclassName} />,
+        label: "Notifications",
+        href: "/notifications",
+      },
+    ],
+    [pathName]
+  );
+
+  const [open, setOpen] = useState(false);
   return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          aria-label="Open Sidebar"
-          className="hover:scale-110 hover:rotate-6"
-        >
-          <Menu />
-        </Button>
-      </SheetTrigger>
-      <SheetContent
-        side="left"
-        className="flex flex-col w-[200px] sm:w-[240px]"
+    <div
+      className={
+        "h-screen rounded-md flex flex-col md:flex-row bg-gray-10 dark:bg-neutral-800 w-full flex-1 max-w-7xl mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden"
+      }
+    >
+      <Sidebar open={open} setOpen={setOpen} animate={true}>
+        <SidebarBody className="justify-between gap-10">
+          <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+            <>
+              <Logo />
+            </>
+            <div className="mt-8 flex flex-col gap-2">
+              {links.map((link, idx) => (
+                <SidebarLink
+                  key={idx}
+                  link={link}
+                  selected={pathName == link.href}
+                />
+              ))}
+            </div>
+          </div>
+        </SidebarBody>
+      </Sidebar>
+      {children}
+    </div>
+  );
+}
+
+export const Logo = () => {
+  return (
+    <Link
+      href="#"
+      className="flex space-x-2 items-center text-sm text-black py-1 relative"
+    >
+      <Bot size={30} className="flex-shrink-0 text-regal-blue" />
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="font-medium text-black dark:text-white whitespace-pre font-ppneuemachina text-2xl"
       >
-        <SheetHeader className="flex justify-center items-center">
-          <SheetTitle className="font-ppneuemachina">HUB</SheetTitle>
-        </SheetHeader>
-        <div className="flex flex-col flex-grow gap-0">
-          {routesItems.map((route) => (
-            <Button
-              key={route.name}
-              variant={pathName == route.path ? "secondary" : "ghost"}
-              onClick={() => router.push(route.path)}
-              className="flex items-center space-between gap-2 w-full text-right"
-            >
-              {route.icon}
-              <p>{route.name}</p>
-            </Button>
-          ))}
-        </div>
-        <SheetFooter>
-          <Button variant="default" size="icon" aria-label="Open Sidebar">
-            <Settings />
-          </Button>
-        </SheetFooter>
-      </SheetContent>
-      <SheetDescription></SheetDescription>
-    </Sheet>
+        HomeLab
+      </motion.span>
+    </Link>
   );
 };
