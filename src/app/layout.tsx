@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Sidebar } from "@/components/layout/SideBar";
+import { AppSidebar } from "@/components/layout/SideBar";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,18 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Toaster position="top-right" duration={1300} />
-        <div className="h-screen flex flex-col">
-          <header className="sticky top-0 z-10 flex flex-row justify-between items-center p-4 shadow-lg bg-gradient-to-r from-regal-blue">
-            <Sidebar />
-            <div className="flex-grow text-center">
-              <h3 className="font-ppneuemachina text-3xl">HomeLab</h3>
-            </div>
-            <div className="w-0"></div>
-          </header>
-          <div className="overflow-y-auto">
-            <div className="px-4 py-2">{children}</div>
-          </div>
-        </div>
+        <AppSidebar>
+          <div className="px-4 py-2 flex">{children}</div>
+        </AppSidebar>
       </body>
     </html>
   );
