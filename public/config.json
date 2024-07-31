@@ -51,5 +51,51 @@
       "description": "HomeKit automation by Apple",
       "tags": ["homekit", "automation"],
       "state": "stopped"
-    }]
+    },
+    {
+      "id": "portainer",
+      "name": "Portainer",
+      "url": "",
+      "logo_path": "portainer",
+      "description": "Portainer small orchestrator",
+      "tags": ["automation"],
+      "state": "running"
+    },
+    {
+      "id": "ilo",
+      "name": "HPE iLO",
+      "url": "",
+      "logo_path": "iLO",
+      "description": "barebone server manager",
+      "tags": [],
+      "state": "running"
+    },
+    {
+      "id": "xen-orchestra",
+      "name": "Xen Orchestra",
+      "url": "",
+      "logo_path": "xen-orchestra",
+      "description": "XCP-ng pools manager's",
+      "tags": [],
+      "state": "running"
+    },
+    {
+      "id": "openvpn",
+      "name": "OpenVPN Server",
+      "url": "",
+      "logo_path": "openvpn",
+      "description": "OpenVPN Server GUI",
+      "tags": [],
+      "state": "running"
+    },
+    {
+      "id": "router",
+      "name": "Router GUI",
+      "url": "",
+      "logo_path": "router",
+      "description": "router setup GUI",
+      "tags": [],
+      "state": "running"
+    }
+  ]
 }
