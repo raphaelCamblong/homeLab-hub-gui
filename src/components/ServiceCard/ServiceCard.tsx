@@ -19,7 +19,7 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   return (
-    <Card className="flex flex-col flex-grow hover:translate-y-[-3px] shadow-lg">
+    <Card className="flex flex-col flex-grow hover:translate-y-[-3px] shadow-lg h-full">
       <CardHeader>
         <CardTitle className="flex flex-row justify-between">
           {service.name}
