@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppSidebar } from "@/components/layout/SideBar";
 import { Toaster } from "@/components/ui/sonner";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Toaster position="top-right" duration={1300} />
         <AppSidebar>
-          <div className="px-4 py-2 flex overflow-auto">{children}</div>
+          <div className="px-4 py-2 flex w-full h-full overflow-y-scroll">
+            <Toaster position="top-right" duration={1300} />
+            {children}
+          </div>
         </AppSidebar>
       </body>
     </html>

@@ -40,10 +40,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
               width={150}
               height={150}
               alt="logo"
-              // className="object-contain"
-              // onError={(e) => {
-              //   e.currentTarget.src = "/not_found.svg";
-              // }}
             />
           </div>
         </div>
