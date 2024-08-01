@@ -5,16 +5,12 @@ import React, { useMemo, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink, Links } from "../ui/sidebar";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
-import path from "path";
 
 export function AppSidebar({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
 
   const iconclassName = " h-5 w-5 flex-shrink-0";
-
   const links: Links[] = useMemo(
     () => [
       {
