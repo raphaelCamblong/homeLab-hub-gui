@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Toaster position="top-right" duration={1300} />
         <AppSidebar>
-          <div className="px-4 py-2 flex">{children}</div>
+          <div className="px-4 py-2 flex overflow-auto">{children}</div>
         </AppSidebar>
       </body>
     </html>
