@@ -1,0 +1,8 @@
+homelab.com {
+    reverse_proxy 0.0.0.0:3000
+    encode gzip
+}
+
+http://homelab.com {
+  redir https://homelabserver:3000{uri}
+}
