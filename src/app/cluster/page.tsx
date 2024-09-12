@@ -1,25 +1,30 @@
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Dashboard from "@/app/cluster/dashboard";
+import CloudNode from "@/app/cluster/node";
+import Host from "@/app/cluster/hosts";
 
-interface ClusterProps {
-  name: string;
-}
+interface ClusterProps {}
 
-const Cluster: React.FC<ClusterProps> = ({ name }) => {
+const Cluster: React.FC<ClusterProps> = () => {
   return (
-    <div>
-      <h1 className="font-ppneuemachina text-3xl">Cluster</h1>
+    <div className="w-full h-full">
+      <h1 className="text-3xl">Cluster K3s</h1>
       <div className="flex flex-row flex-grow justify-between">
-        <Tabs defaultValue="account" className="w-[400px]">
+        <Tabs defaultValue="Host">
           <TabsList>
-            <TabsTrigger value="metric">Metrics</TabsTrigger>
-            <TabsTrigger value="statistic">Statistic</TabsTrigger>
+            <TabsTrigger value="Dashboard">Dashboard</TabsTrigger>
+            <TabsTrigger value="Node">Nodes</TabsTrigger>
+            <TabsTrigger value="Host">Hosts</TabsTrigger>
           </TabsList>
-          <TabsContent value="metric">
-            Make changes to your account here.
+          <TabsContent value="Dashboard">
+            <Dashboard />
           </TabsContent>
-          <TabsContent value="statistic">
-            Change your password here.
+          <TabsContent value="Node">
+            <CloudNode />
+          </TabsContent>
+          <TabsContent value="Host">
+            <Host />
           </TabsContent>
         </Tabs>
       </div>
