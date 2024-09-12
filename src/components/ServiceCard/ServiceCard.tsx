@@ -1,7 +1,6 @@
 import React from "react";
-import { Service } from "@/services/api/types/Service";
+import { Service } from "@/services/backend/types/Service";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { ServiceDrawer } from "@/components/ServiceDrawer";
 import {
   Card,
@@ -10,9 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { TriangleAlert } from "lucide-react";
 
 import { MonitorCheck, MonitorStop } from "lucide-react";
+
 interface ServiceCardProps {
   service: Service;
 }

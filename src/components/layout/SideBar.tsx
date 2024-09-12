@@ -1,12 +1,10 @@
 "use client";
-import { Cloud, Cable, Bot, Settings, Bell, MemoryStick } from "lucide-react";
+import { Cloud, Cable, Settings, Bell, MemoryStick } from "lucide-react";
 
 import React, { useMemo, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink, Links } from "../ui/sidebar";
-import Link from "next/link";
-import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-
+import { Logo } from "../Logo";
 export function AppSidebar({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
 
@@ -66,21 +64,3 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
-export const Logo = () => {
-  return (
-    <Link
-      href="#"
-      className="flex space-x-2 items-center text-sm text-black py-1 relative"
-    >
-      <Bot size={30} className="flex-shrink-0 text-regal-blue" />
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="font-medium text-black dark:text-white whitespace-pre font-ppneuemachina text-2xl"
-      >
-        HomeLab
-      </motion.span>
-    </Link>
-  );
-};

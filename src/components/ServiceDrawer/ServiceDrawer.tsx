@@ -1,17 +1,16 @@
 "use client";
-import React, { useState } from "react";
-import { Service } from "@/services/api/types/Service";
+import React from "react";
+import { Service } from "@/services/backend/types/Service";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerTrigger,
-  DrawerClose,
-  DrawerDescription,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
+  DrawerTrigger,
 } from "@/components/ui/drawer";
-import { ListPlus, Forward, CircleDot, CircleDotDashed } from "lucide-react";
+import { CircleDot, CircleDotDashed, Forward, ListPlus } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { useRouter } from "next/navigation";
@@ -35,7 +34,7 @@ const ServiceDrawer: React.FC<ServiceDrawerProps> = ({ service }) => {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle className="flex flex-row items-center gap-2 font-ppneuemachina">
+          <DrawerTitle className="flex flex-row items-center gap-2">
             {service.name}
             {service.state === "running" ? (
               <CircleDot color="green" aria-label="Running" />
