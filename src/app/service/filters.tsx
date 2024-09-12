@@ -50,7 +50,7 @@ const ServiceFilters: React.FC<ServiceFiltersProps> = ({
           <AccordionTrigger>
             <div className="flex flex-row gap-2">
               <SlidersHorizontal />
-              <h3 className="font-ppneuemachina">Filters</h3>
+              <h3>Filters</h3>
             </div>
           </AccordionTrigger>
           <AccordionContent>

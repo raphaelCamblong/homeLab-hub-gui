@@ -6,11 +6,11 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Notification as NotificationType } from "@/services/store/notificationStore";
 import { Terminal, Trash } from "lucide-react";
 
-interface NotifactionProps {
+interface NotificationItemProps {
   item: NotificationType;
 }
 
-const Notification: React.FC<NotifactionProps> = ({ item }) => {
+const NotificationItem: React.FC<NotificationItemProps> = ({ item }) => {
   const { removeNotification } = useNotification();
   const color = item.type === "success" ? "green-pastel" : "red-pastel";
 
@@ -32,24 +32,22 @@ const Notification: React.FC<NotifactionProps> = ({ item }) => {
   );
 };
 
-interface NotifactionsProps {
-  name: string;
-}
-const Notifactions: React.FC<NotifactionsProps> = ({ name }) => {
-  const { notifications, pushNotification, clearNotifications } =
-    useNotification();
+interface NotificationProps {}
+
+const Notification: React.FC<NotificationProps> = ({}) => {
+  const { notifications, clearNotifications } = useNotification();
 
   return (
-    <div>
-      <h1 className="font-ppneuemachina text-3xl">Notifactions</h1>
+    <div className="w-full h-full">
+      <h1 className="text-3xl">Notification</h1>
       <Button onClick={clearNotifications}> Clear all</Button>
       <div className="flex flex-col gap-2">
         {notifications.map((notification) => (
-          <Notification key={notification.id} item={notification} />
+          <NotificationItem key={notification.id} item={notification} />
         ))}
       </div>
     </div>
   );
 };
 
-export default Notifactions;
+export default Notification;

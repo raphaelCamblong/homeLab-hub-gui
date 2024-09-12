@@ -1,12 +1,11 @@
 "use client";
-import React, { use, useCallback, useMemo } from "react";
+import React from "react";
 import { ServiceCard } from "@/components/ServiceCard";
 import { Separator } from "@/components/ui/separator";
-import { useService } from "@/services/api/hooks/useService";
+import { useService } from "@/services/backend/hooks/useService";
 import { Loader } from "lucide-react";
-import { Services, ServiceState } from "@/services/api/types/Service";
-import useFilters, { Filter } from "@/lib/useFilters";
-import ServiceFilters from "./filters";
+import { ServiceState } from "@/services/backend/types/Service";
+import { Filter } from "@/lib/useFilters";
 import { motion } from "framer-motion";
 
 export interface ServiceFilterItems extends Filter {
@@ -14,64 +13,22 @@ export interface ServiceFilterItems extends Filter {
   state: ServiceState[];
 }
 
-interface ServiceProps {
-  name: string;
-}
+interface ServiceProps {}
 
-function getAllTags(services: Services): string[] {
-  if (!services) {
-    return [];
-  }
-  const tagsSet = new Set<string>();
-  services.forEach((service) => {
-    service.tags.forEach((tag) => {
-      tagsSet.add(tag);
-    });
-  });
-  return Array.from(tagsSet);
-}
+const Service: React.FC<ServiceProps> = () => {
+  const { data: services, isLoading } = useService();
 
-const Service: React.FC<ServiceProps> = ({ name }) => {
-  const { services, isError, isLoading } = useService();
-  const [filters, setFilters, resetFilter] = useFilters<ServiceFilterItems>({
-    tags: [],
-    state: [ServiceState.Running, ServiceState.Stopped],
-  });
-
-  const allTags = useMemo(() => {
-    return getAllTags(services as Services);
-  }, [services]);
-
-  const filteredServices = useMemo(() => {
-    return services
-      ?.filter(
-        (service) => service.state && filters.state.includes(service.state)
-      )
-      .filter((service) => {
-        return (
-          filters.tags.length === 0 ||
-          service.tags.some((tag) => filters.tags.includes(tag))
-        );
-      });
-  }, [services, filters]);
-
+  console.log("filteredServices", services);
   return (
     <div className="flex flex-col gap-4 items-stretch">
-      <h1 className="font-ppneuemachina text-3xl">Service</h1>
-      <ServiceFilters
-        availableTags={allTags}
-        filters={filters}
-        setFilters={setFilters}
-        resetFilter={resetFilter}
-      />
+      <h1 className="text-3xl">Service</h1>
       <Separator />
+      {isLoading && <Loader />}
       <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
         layout
       >
-        {isLoading && <Loader />}
-        {isError && <div>{isError}</div>}
-        {filteredServices?.map((service, index) => (
+        {services?.map((service, index) => (
           <motion.div
             key={service.name}
             initial={{ opacity: 0, y: 20 }}

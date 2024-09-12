@@ -65,7 +65,7 @@
       "id": "ilo",
       "name": "HPE iLO",
       "url": "",
-      "logo_path": "iLO",
+      "logo_path": "https://e7.pngegg.com/pngimages/427/481/png-clipart-laptop-hewlett-packard-enterprise-hp-pavilion-ddr3-sdram-hp-integrated-lights-out-hp-logo-icon-miscellaneous-text.png",
       "description": "barebone server manager",
       "tags": [],
       "state": "running"
