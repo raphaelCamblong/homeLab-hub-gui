@@ -1,0 +1,43 @@
+name: Linting with pnpm
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.4.0
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run linter
+        run: pnpm lint
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+            {{ runner.os }}-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run linter
+        run: pnpm lint
