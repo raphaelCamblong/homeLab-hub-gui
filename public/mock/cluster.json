@@ -1,0 +1,62 @@
+{
+    "hosts": [
+        {
+            "id": 1,
+            "name": "host1",
+            "ip": ""
+        }
+    ],
+    "nodes": [
+        {
+            "id": 1,
+            "name": "vm1",
+            "role": "vm1",
+            "ip": "vm1",
+            "running": 1,
+            "stats": {
+                "cpu": [0.1],
+                "mem": [0.1],
+                "disk": [0.1]
+            }
+        }
+    ],
+    "services": [
+        {
+            "id": 1,
+            "name": "service1",
+            "type": "service1",
+            "running": 1,
+            "stats": {
+                "cpu": [0.1],
+                "mem": [0.1],
+                "disk": [0.1]
+            }
+        }
+    ],
+    "networks": [
+        {
+            "id": 1,
+            "name": "network1",
+            "type": "network1",
+            "running": 1,
+            "stats": {
+                "cpu": [0.1],
+                "mem": [0.1],
+                "disk": [0.1]
+            }
+        }
+    ],
+    "storages": [
+        {
+            "id": 1,
+            "name": "storage1",
+            "type": "storage1",
+            "running": 1,
+            "stats": {
+                "cpu": [0.1],
+                "mem": [0.1],
+                "disk": [0.1]
+            }
+        }
+    ],
+}

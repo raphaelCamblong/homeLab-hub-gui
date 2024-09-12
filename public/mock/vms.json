@@ -1,0 +1,689 @@
+[
+  {
+    "type": "VM",
+    "addresses": {
+      "0/ipv4/0": "192.168.1.38",
+      "0/ipv6/0": "2a01:cb18:8493:3900:7432:b5ff:fe06:e97b",
+      "0/ipv6/1": "fe80::7432:b5ff:fe06:e97b"
+    },
+    "auto_poweron": false,
+    "bios_strings": {
+      "bios-vendor": "Xen",
+      "bios-version": "",
+      "system-manufacturer": "Xen",
+      "system-product-name": "HVM domU",
+      "system-version": "",
+      "system-serial-number": "",
+      "baseboard-manufacturer": "",
+      "baseboard-product-name": "",
+      "baseboard-version": "",
+      "baseboard-serial-number": "",
+      "baseboard-asset-tag": "",
+      "baseboard-location-in-chassis": "",
+      "enclosure-asset-tag": "",
+      "oem-1": "Xen",
+      "oem-2": "MS_VM_CERT/SHA1/bdbeb6e0a816d43fa6d3fe8aaef04c2bad9d3e3d",
+      "oem-3": "",
+      "oem-4": "",
+      "oem-5": "",
+      "hp-rombios": ""
+    },
+    "blockedOperations": {},
+    "boot": {
+      "firmware": "bios",
+      "order": "cnd"
+    },
+    "CPUs": {
+      "max": 4,
+      "number": 4,
+      "cpu_count": null,
+      "socket_count": null,
+      "vendor": null,
+      "speed": null,
+      "modelname": null,
+      "family": null,
+      "model": null,
+      "stepping": null,
+      "flags": null,
+      "features_pv": null,
+      "features_hvm": null,
+      "features_hvm_host": null,
+      "features_pv_host": null
+    },
+    "creation": {
+      "date": "2024-08-27T14:35:01.461Z",
+      "template": "443095df-5885-e717-07a2-557b8c32a381",
+      "user": "4a62c632-fb89-401d-9931-09f541704f5f"
+    },
+    "current_operations": {},
+    "expNestedHvm": false,
+    "viridian": false,
+    "mainIpAddress": "192.168.1.38",
+    "high_availability": "",
+    "isFirmwareSupported": true,
+    "memory": {
+      "dynamic": [
+        3221225472,
+        3221225472
+      ],
+      "static": [
+        1073741824,
+        3221225472
+      ],
+      "size": 3221225472
+    },
+    "installTime": 1724769301,
+    "name_description": "kubernetes master",
+    "name_label": "Master 1",
+    "needsVtpm": false,
+    "other": {
+      "xo:6897f0d5": "",
+      "auto_poweron": "",
+      "xo:0df69429": "",
+      "xo:41b2e070": "{\"creation\":{\"date\":\"2024-08-06T10:04:02.431Z\",\"template\":\"df1a0e64-3799-482b-aa9f-1ed713c7dac5\",\"user\":\"4a62c632-fb89-401d-9931-09f541704f5f\"}}",
+      "base_template_name": "Ubuntu Jammy Jellyfish 22.04",
+      "import_task": "OpaqueRef:14f7d1b8-041b-4eef-9d66-c9bdb11dc7e3",
+      "mac_seed": "27202654-420e-9ba3-c37b-5c51cc2ccab9",
+      "install-methods": "cdrom,nfs,http,ftp",
+      "linux_template": "true"
+    },
+    "os_version": {
+      "name": "Ubuntu 24.04 LTS",
+      "uname": "6.8.0-39-generic",
+      "distro": "ubuntu",
+      "major": "24",
+      "minor": "04"
+    },
+    "power_state": "Running",
+    "hasVendorDevice": false,
+    "snapshots": [],
+    "startDelay": 0,
+    "startTime": 1724943010,
+    "secureBoot": false,
+    "tags": [],
+    "VIFs": [
+      "10d77f21-fd88-0033-5b1a-ed4caab65e1e"
+    ],
+    "VTPMs": [],
+    "virtualizationMode": "hvm",
+    "xenTools": {
+      "major": 7,
+      "minor": 30,
+      "version": 7.3
+    },
+    "managementAgentDetected": true,
+    "pvDriversDetected": true,
+    "pvDriversVersion": "7.30.0-11",
+    "pvDriversUpToDate": true,
+    "$container": "5716b948-4d3b-4dca-b0cd-5f963cbd69fd",
+    "$VBDs": [
+      "503381fe-09a9-fc01-87e7-11c58fc0d577",
+      "47e2dea1-e7fe-1ed7-fdd2-38bce4ac28ee"
+    ],
+    "VGPUs": [],
+    "$VGPUs": [],
+    "xenStoreData": {
+      "vm-data/mmio-hole-size": "268435456",
+      "vm-data": ""
+    },
+    "vga": "std",
+    "videoram": "8",
+    "id": "e70413e3-9c9f-8269-7954-49dc26ca4af7",
+    "uuid": "e70413e3-9c9f-8269-7954-49dc26ca4af7",
+    "$pool": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "$poolId": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "_xapiRef": "OpaqueRef:9bff19a8-344b-4bd5-989b-9c7e2b889279",
+    "messages_href": "/rest/v0/vms/e70413e3-9c9f-8269-7954-49dc26ca4af7/messages",
+    "vdis_href": "/rest/v0/vms/e70413e3-9c9f-8269-7954-49dc26ca4af7/vdis"
+  },
+  {
+    "type": "VM",
+    "addresses": {
+      "0/ipv4/0": "192.168.1.37",
+      "0/ipv6/0": "2a01:cb18:8493:3900:cbd:abff:fef8:42bb",
+      "0/ipv6/1": "fe80::cbd:abff:fef8:42bb"
+    },
+    "auto_poweron": true,
+    "bios_strings": {
+      "bios-vendor": "Xen",
+      "bios-version": "",
+      "system-manufacturer": "Xen",
+      "system-product-name": "HVM domU",
+      "system-version": "",
+      "system-serial-number": "",
+      "baseboard-manufacturer": "",
+      "baseboard-product-name": "",
+      "baseboard-version": "",
+      "baseboard-serial-number": "",
+      "baseboard-asset-tag": "",
+      "baseboard-location-in-chassis": "",
+      "enclosure-asset-tag": "",
+      "oem-1": "Xen",
+      "oem-2": "MS_VM_CERT/SHA1/bdbeb6e0a816d43fa6d3fe8aaef04c2bad9d3e3d",
+      "oem-3": "",
+      "oem-4": "",
+      "oem-5": "",
+      "hp-rombios": ""
+    },
+    "blockedOperations": {},
+    "boot": {
+      "firmware": "bios",
+      "order": "cnd"
+    },
+    "CPUs": {
+      "max": 4,
+      "number": 4,
+      "cpu_count": null,
+      "socket_count": null,
+      "vendor": null,
+      "speed": null,
+      "modelname": null,
+      "family": null,
+      "model": null,
+      "stepping": null,
+      "flags": null,
+      "features_pv": null,
+      "features_hvm": null,
+      "features_hvm_host": null,
+      "features_pv_host": null
+    },
+    "creation": {
+      "date": "2024-08-27T14:23:42.53Z",
+      "template": "443095df-5885-e717-07a2-557b8c32a381",
+      "user": "4a62c632-fb89-401d-9931-09f541704f5f"
+    },
+    "current_operations": {},
+    "expNestedHvm": false,
+    "viridian": false,
+    "mainIpAddress": "192.168.1.37",
+    "high_availability": "",
+    "isFirmwareSupported": true,
+    "memory": {
+      "dynamic": [
+        3221225472,
+        3221225472
+      ],
+      "static": [
+        1073741824,
+        3221225472
+      ],
+      "size": 3221225472
+    },
+    "installTime": 1724768622,
+    "name_description": "kubernetes master",
+    "name_label": "Master 0",
+    "needsVtpm": false,
+    "other": {
+      "xo:6897f0d5": "",
+      "auto_poweron": "true",
+      "xo:0df69429": "",
+      "xo:41b2e070": "{\"creation\":{\"date\":\"2024-08-06T10:04:02.431Z\",\"template\":\"df1a0e64-3799-482b-aa9f-1ed713c7dac5\",\"user\":\"4a62c632-fb89-401d-9931-09f541704f5f\"}}",
+      "base_template_name": "Ubuntu Jammy Jellyfish 22.04",
+      "import_task": "OpaqueRef:14f7d1b8-041b-4eef-9d66-c9bdb11dc7e3",
+      "mac_seed": "a7d7805e-ef59-f4d0-0d8f-92317e1b38d2",
+      "install-methods": "cdrom,nfs,http,ftp",
+      "linux_template": "true"
+    },
+    "os_version": {
+      "name": "Ubuntu 24.04 LTS",
+      "uname": "6.8.0-39-generic",
+      "distro": "ubuntu",
+      "major": "24",
+      "minor": "04"
+    },
+    "power_state": "Running",
+    "hasVendorDevice": false,
+    "snapshots": [
+      "75afae0e-da05-6366-7926-cb6983863306"
+    ],
+    "startDelay": 0,
+    "startTime": 1724943010,
+    "secureBoot": false,
+    "tags": [],
+    "VIFs": [
+      "44e4f493-6c43-7633-3509-13b0c58252fd"
+    ],
+    "VTPMs": [],
+    "virtualizationMode": "hvm",
+    "xenTools": {
+      "major": 7,
+      "minor": 30,
+      "version": 7.3
+    },
+    "managementAgentDetected": true,
+    "pvDriversDetected": true,
+    "pvDriversVersion": "7.30.0-11",
+    "pvDriversUpToDate": true,
+    "$container": "5716b948-4d3b-4dca-b0cd-5f963cbd69fd",
+    "$VBDs": [
+      "496c9a04-d44d-db7d-27ab-a640b69ffb99",
+      "34a97099-ebb5-e189-ab49-389ef5244baa"
+    ],
+    "VGPUs": [],
+    "$VGPUs": [],
+    "xenStoreData": {
+      "vm-data/mmio-hole-size": "268435456",
+      "vm-data": ""
+    },
+    "vga": "std",
+    "videoram": "8",
+    "id": "5f4f25e8-a762-4154-b020-123236372502",
+    "uuid": "5f4f25e8-a762-4154-b020-123236372502",
+    "$pool": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "$poolId": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "_xapiRef": "OpaqueRef:be69597e-9ae4-4d25-8369-241f40fa0794",
+    "messages_href": "/rest/v0/vms/5f4f25e8-a762-4154-b020-123236372502/messages",
+    "vdis_href": "/rest/v0/vms/5f4f25e8-a762-4154-b020-123236372502/vdis"
+  },
+  {
+    "type": "VM",
+    "addresses": {
+      "0/ipv4/0": "192.168.1.41",
+      "0/ipv6/0": "2a01:cb18:8493:3900:b81a:4fff:fedd:ea07",
+      "0/ipv6/1": "fe80::b81a:4fff:fedd:ea07"
+    },
+    "auto_poweron": true,
+    "bios_strings": {
+      "bios-vendor": "Xen",
+      "bios-version": "",
+      "system-manufacturer": "Xen",
+      "system-product-name": "HVM domU",
+      "system-version": "",
+      "system-serial-number": "",
+      "baseboard-manufacturer": "",
+      "baseboard-product-name": "",
+      "baseboard-version": "",
+      "baseboard-serial-number": "",
+      "baseboard-asset-tag": "",
+      "baseboard-location-in-chassis": "",
+      "enclosure-asset-tag": "",
+      "oem-1": "Xen",
+      "oem-2": "MS_VM_CERT/SHA1/bdbeb6e0a816d43fa6d3fe8aaef04c2bad9d3e3d",
+      "oem-3": "",
+      "oem-4": "",
+      "oem-5": "",
+      "hp-rombios": ""
+    },
+    "blockedOperations": {},
+    "boot": {
+      "firmware": "bios",
+      "order": "cnd"
+    },
+    "CPUs": {
+      "max": 10,
+      "number": 10,
+      "cpu_count": null,
+      "socket_count": null,
+      "vendor": null,
+      "speed": null,
+      "modelname": null,
+      "family": null,
+      "model": null,
+      "stepping": null,
+      "flags": null,
+      "features_pv": null,
+      "features_hvm": null,
+      "features_hvm_host": null,
+      "features_pv_host": null
+    },
+    "creation": {
+      "date": "2024-08-27T14:45:36.781Z",
+      "template": "753cbdec-c14b-bd01-8fc8-6d3521378fef",
+      "user": "4a62c632-fb89-401d-9931-09f541704f5f"
+    },
+    "current_operations": {},
+    "expNestedHvm": false,
+    "viridian": false,
+    "mainIpAddress": "192.168.1.41",
+    "high_availability": "",
+    "isFirmwareSupported": true,
+    "memory": {
+      "dynamic": [
+        7516192768,
+        7516192768
+      ],
+      "static": [
+        1073741824,
+        7516192768
+      ],
+      "size": 7516192768
+    },
+    "installTime": 1724769936,
+    "name_description": "kubernetes worker",
+    "name_label": "Worker 1",
+    "needsVtpm": false,
+    "other": {
+      "xo:6897f0d5": "{\"creation\":{\"date\":\"2024-08-27T14:45:36.781Z\",\"template\":\"753cbdec-c14b-bd01-8fc8-6d3521378fef\",\"user\":\"4a62c632-fb89-401d-9931-09f541704f5f\"}}",
+      "auto_poweron": "true",
+      "xo:0df69429": "{\"creation\":{\"date\":\"2024-08-06T11:15:19.644Z\",\"template\":\"443095df-5885-e717-07a2-557b8c32a381\",\"user\":\"4a62c632-fb89-401d-9931-09f541704f5f\"}}",
+      "xo:41b2e070": "{\"creation\":{\"date\":\"2024-08-06T10:04:02.431Z\",\"template\":\"df1a0e64-3799-482b-aa9f-1ed713c7dac5\",\"user\":\"4a62c632-fb89-401d-9931-09f541704f5f\"}}",
+      "base_template_name": "Ubuntu Jammy Jellyfish 22.04",
+      "import_task": "OpaqueRef:14f7d1b8-041b-4eef-9d66-c9bdb11dc7e3",
+      "mac_seed": "d78f0965-e84b-2257-563a-b83fd090b464",
+      "install-methods": "cdrom,nfs,http,ftp",
+      "linux_template": "true"
+    },
+    "os_version": {
+      "name": "Ubuntu 24.04 LTS",
+      "uname": "6.8.0-39-generic",
+      "distro": "ubuntu",
+      "major": "24",
+      "minor": "04"
+    },
+    "power_state": "Running",
+    "hasVendorDevice": false,
+    "snapshots": [],
+    "startDelay": 0,
+    "startTime": 1724803440,
+    "secureBoot": false,
+    "tags": [],
+    "VIFs": [
+      "d9850d57-e2bc-d28a-871b-a138f561fda6"
+    ],
+    "VTPMs": [],
+    "virtualizationMode": "hvm",
+    "xenTools": {
+      "major": 7,
+      "minor": 30,
+      "version": 7.3
+    },
+    "managementAgentDetected": true,
+    "pvDriversDetected": true,
+    "pvDriversVersion": "7.30.0-11",
+    "pvDriversUpToDate": true,
+    "$container": "5716b948-4d3b-4dca-b0cd-5f963cbd69fd",
+    "$VBDs": [
+      "7744d5d8-8370-010b-c7dc-9f9df2855855",
+      "3f44f937-3a56-9597-3a04-33d9663cc3d3"
+    ],
+    "VGPUs": [],
+    "$VGPUs": [],
+    "xenStoreData": {
+      "vm-data/mmio-hole-size": "268435456",
+      "vm-data": ""
+    },
+    "vga": "std",
+    "videoram": "8",
+    "id": "6897f0d5-77d5-48b1-8bf6-807513b5883c",
+    "uuid": "6897f0d5-77d5-48b1-8bf6-807513b5883c",
+    "$pool": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "$poolId": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "_xapiRef": "OpaqueRef:14d91391-0e8e-43df-8aee-55889a170dd4",
+    "messages_href": "/rest/v0/vms/6897f0d5-77d5-48b1-8bf6-807513b5883c/messages",
+    "vdis_href": "/rest/v0/vms/6897f0d5-77d5-48b1-8bf6-807513b5883c/vdis"
+  },
+  {
+    "type": "VM",
+    "addresses": {
+      "0/ipv4/0": "192.168.1.40",
+      "0/ipv6/0": "2a01:cb18:8493:3900:88b9:5bff:fe9e:ddce",
+      "0/ipv6/1": "fe80::88b9:5bff:fe9e:ddce"
+    },
+    "auto_poweron": true,
+    "bios_strings": {
+      "bios-vendor": "Xen",
+      "bios-version": "",
+      "system-manufacturer": "Xen",
+      "system-product-name": "HVM domU",
+      "system-version": "",
+      "system-serial-number": "",
+      "baseboard-manufacturer": "",
+      "baseboard-product-name": "",
+      "baseboard-version": "",
+      "baseboard-serial-number": "",
+      "baseboard-asset-tag": "",
+      "baseboard-location-in-chassis": "",
+      "enclosure-asset-tag": "",
+      "oem-1": "Xen",
+      "oem-2": "MS_VM_CERT/SHA1/bdbeb6e0a816d43fa6d3fe8aaef04c2bad9d3e3d",
+      "oem-3": "",
+      "oem-4": "",
+      "oem-5": "",
+      "hp-rombios": ""
+    },
+    "blockedOperations": {},
+    "boot": {
+      "firmware": "bios",
+      "order": "cnd"
+    },
+    "CPUs": {
+      "max": 10,
+      "number": 10,
+      "cpu_count": null,
+      "socket_count": null,
+      "vendor": null,
+      "speed": null,
+      "modelname": null,
+      "family": null,
+      "model": null,
+      "stepping": null,
+      "flags": null,
+      "features_pv": null,
+      "features_hvm": null,
+      "features_hvm_host": null,
+      "features_pv_host": null
+    },
+    "creation": {
+      "date": "2024-08-27T14:44:16.203Z",
+      "template": "753cbdec-c14b-bd01-8fc8-6d3521378fef",
+      "user": "4a62c632-fb89-401d-9931-09f541704f5f"
+    },
+    "current_operations": {},
+    "expNestedHvm": false,
+    "viridian": false,
+    "mainIpAddress": "192.168.1.40",
+    "high_availability": "",
+    "isFirmwareSupported": true,
+    "memory": {
+      "dynamic": [
+        8589934592,
+        8589934592
+      ],
+      "static": [
+        1073741824,
+        8589934592
+      ],
+      "size": 8589934592
+    },
+    "installTime": 1724769856,
+    "name_description": "kubernetes master",
+    "name_label": "Worker 0",
+    "needsVtpm": false,
+    "other": {
+      "xo:6897f0d5": "",
+      "auto_poweron": "true",
+      "xo:0df69429": "{\"creation\":{\"date\":\"2024-08-06T11:15:19.644Z\",\"template\":\"443095df-5885-e717-07a2-557b8c32a381\",\"user\":\"4a62c632-fb89-401d-9931-09f541704f5f\"}}",
+      "xo:41b2e070": "{\"creation\":{\"date\":\"2024-08-06T10:04:02.431Z\",\"template\":\"df1a0e64-3799-482b-aa9f-1ed713c7dac5\",\"user\":\"4a62c632-fb89-401d-9931-09f541704f5f\"}}",
+      "base_template_name": "Ubuntu Jammy Jellyfish 22.04",
+      "import_task": "OpaqueRef:14f7d1b8-041b-4eef-9d66-c9bdb11dc7e3",
+      "mac_seed": "f6827275-cfef-5ff9-3e81-d73909b62389",
+      "install-methods": "cdrom,nfs,http,ftp",
+      "linux_template": "true"
+    },
+    "os_version": {
+      "name": "Ubuntu 24.04 LTS",
+      "uname": "6.8.0-39-generic",
+      "distro": "ubuntu",
+      "major": "24",
+      "minor": "04"
+    },
+    "power_state": "Running",
+    "hasVendorDevice": false,
+    "snapshots": [],
+    "startDelay": 0,
+    "startTime": 1724803435,
+    "secureBoot": false,
+    "tags": [],
+    "VIFs": [
+      "e27fa8ad-d8ce-aa0c-4e74-ec627257e4ce"
+    ],
+    "VTPMs": [],
+    "virtualizationMode": "hvm",
+    "xenTools": {
+      "major": 7,
+      "minor": 30,
+      "version": 7.3
+    },
+    "managementAgentDetected": true,
+    "pvDriversDetected": true,
+    "pvDriversVersion": "7.30.0-11",
+    "pvDriversUpToDate": true,
+    "$container": "5716b948-4d3b-4dca-b0cd-5f963cbd69fd",
+    "$VBDs": [
+      "c31056ab-d21a-5ea5-7c6e-d462ed0b1406",
+      "3b03e9e0-a7b1-64a8-17cc-fb0d0f8ce361"
+    ],
+    "VGPUs": [],
+    "$VGPUs": [],
+    "xenStoreData": {
+      "vm-data/mmio-hole-size": "268435456",
+      "vm-data": ""
+    },
+    "vga": "std",
+    "videoram": "8",
+    "id": "22bbd5e1-2adf-20ee-223d-f48eca6aa5ef",
+    "uuid": "22bbd5e1-2adf-20ee-223d-f48eca6aa5ef",
+    "$pool": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "$poolId": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "_xapiRef": "OpaqueRef:a88a8228-ef19-4952-bdf7-2347cd23e1c5",
+    "messages_href": "/rest/v0/vms/22bbd5e1-2adf-20ee-223d-f48eca6aa5ef/messages",
+    "vdis_href": "/rest/v0/vms/22bbd5e1-2adf-20ee-223d-f48eca6aa5ef/vdis"
+  },
+  {
+    "type": "VM",
+    "addresses": {
+      "0/ipv4/0": "192.168.1.39",
+      "0/ipv6/0": "2a01:cb18:8493:3900:507f:1dff:fe13:5918",
+      "0/ipv6/1": "fe80::507f:1dff:fe13:5918"
+    },
+    "auto_poweron": true,
+    "bios_strings": {
+      "bios-vendor": "Xen",
+      "bios-version": "",
+      "system-manufacturer": "Xen",
+      "system-product-name": "HVM domU",
+      "system-version": "",
+      "system-serial-number": "",
+      "baseboard-manufacturer": "",
+      "baseboard-product-name": "",
+      "baseboard-version": "",
+      "baseboard-serial-number": "",
+      "baseboard-asset-tag": "",
+      "baseboard-location-in-chassis": "",
+      "enclosure-asset-tag": "",
+      "oem-1": "Xen",
+      "oem-2": "MS_VM_CERT/SHA1/bdbeb6e0a816d43fa6d3fe8aaef04c2bad9d3e3d",
+      "oem-3": "",
+      "oem-4": "",
+      "oem-5": "",
+      "hp-rombios": ""
+    },
+    "blockedOperations": {},
+    "boot": {
+      "firmware": "bios",
+      "order": "cnd"
+    },
+    "CPUs": {
+      "max": 4,
+      "number": 4,
+      "cpu_count": null,
+      "socket_count": null,
+      "vendor": null,
+      "speed": null,
+      "modelname": null,
+      "family": null,
+      "model": null,
+      "stepping": null,
+      "flags": null,
+      "features_pv": null,
+      "features_hvm": null,
+      "features_hvm_host": null,
+      "features_pv_host": null
+    },
+    "creation": {
+      "date": "2024-08-27T14:41:30.502Z",
+      "template": "443095df-5885-e717-07a2-557b8c32a381",
+      "user": "4a62c632-fb89-401d-9931-09f541704f5f"
+    },
+    "current_operations": {},
+    "expNestedHvm": false,
+    "viridian": false,
+    "mainIpAddress": "192.168.1.39",
+    "high_availability": "",
+    "isFirmwareSupported": true,
+    "memory": {
+      "dynamic": [
+        3221225472,
+        3221225472
+      ],
+      "static": [
+        1073741824,
+        3221225472
+      ],
+      "size": 3221225472
+    },
+    "installTime": 1724769690,
+    "name_description": "kubernetes master",
+    "name_label": "Master 2",
+    "needsVtpm": false,
+    "other": {
+      "xo:6897f0d5": "",
+      "auto_poweron": "true",
+      "xo:0df69429": "",
+      "xo:41b2e070": "{\"creation\":{\"date\":\"2024-08-06T10:04:02.431Z\",\"template\":\"df1a0e64-3799-482b-aa9f-1ed713c7dac5\",\"user\":\"4a62c632-fb89-401d-9931-09f541704f5f\"}}",
+      "base_template_name": "Ubuntu Jammy Jellyfish 22.04",
+      "import_task": "OpaqueRef:14f7d1b8-041b-4eef-9d66-c9bdb11dc7e3",
+      "mac_seed": "88031835-fc39-55bf-a7ed-45a7419bc2c3",
+      "install-methods": "cdrom,nfs,http,ftp",
+      "linux_template": "true"
+    },
+    "os_version": {
+      "name": "Ubuntu 24.04 LTS",
+      "uname": "6.8.0-39-generic",
+      "distro": "ubuntu",
+      "major": "24",
+      "minor": "04"
+    },
+    "power_state": "Running",
+    "hasVendorDevice": false,
+    "snapshots": [],
+    "startDelay": 0,
+    "startTime": 1724943010,
+    "secureBoot": false,
+    "tags": [],
+    "VIFs": [
+      "a3ee324a-dc02-8eb1-441d-dee08007f22f"
+    ],
+    "VTPMs": [],
+    "virtualizationMode": "hvm",
+    "xenTools": {
+      "major": 7,
+      "minor": 30,
+      "version": 7.3
+    },
+    "managementAgentDetected": true,
+    "pvDriversDetected": true,
+    "pvDriversVersion": "7.30.0-11",
+    "pvDriversUpToDate": true,
+    "$container": "5716b948-4d3b-4dca-b0cd-5f963cbd69fd",
+    "$VBDs": [
+      "10d92326-51e4-f8a6-b313-1d817fea5a91",
+      "d3eff9bb-395c-2b65-1162-da1e878980de"
+    ],
+    "VGPUs": [],
+    "$VGPUs": [],
+    "xenStoreData": {
+      "vm-data/mmio-hole-size": "268435456",
+      "vm-data": ""
+    },
+    "vga": "std",
+    "videoram": "2",
+    "id": "56bdf4c1-956b-660a-47f4-c1908b2af627",
+    "uuid": "56bdf4c1-956b-660a-47f4-c1908b2af627",
+    "$pool": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "$poolId": "0fda2eba-8844-4a70-c248-09274cce021e",
+    "_xapiRef": "OpaqueRef:226f1da8-b630-4ee5-9b00-449bf3af258b",
+    "messages_href": "/rest/v0/vms/56bdf4c1-956b-660a-47f4-c1908b2af627/messages",
+    "vdis_href": "/rest/v0/vms/56bdf4c1-956b-660a-47f4-c1908b2af627/vdis"
+  }
+]
