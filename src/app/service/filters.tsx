@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { MonitorCheck, MonitorStop, SlidersHorizontal } from "lucide-react";
 import {
@@ -37,7 +37,8 @@ const ServiceFilters: React.FC<ServiceFiltersProps> = ({
     "stopped",
   ]);
   const [selectedTags, setSelectedTags] = useState<string>("");
-  useEffect(() => {
+
+  updateFilters(() => {
     setFilters((filters: Filter) => {
       return { ...filters, state: selectedStates, tags: selectedTags };
     });

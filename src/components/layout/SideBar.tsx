@@ -1,10 +1,11 @@
 "use client";
-import { Cloud, Cable, Settings, Bell, MemoryStick } from "lucide-react";
+import { Bell, Cable, Cloud, MemoryStick } from "lucide-react";
 
 import React, { useMemo, useState } from "react";
-import { Sidebar, SidebarBody, SidebarLink, Links } from "../ui/sidebar";
+import { Links, Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 import { usePathname } from "next/navigation";
 import { Logo } from "../Logo";
+
 export function AppSidebar({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
 
@@ -32,7 +33,7 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
         href: "/notifications",
       },
     ],
-    [pathName]
+    [],
   );
 
   const [open, setOpen] = useState(false);

@@ -5,10 +5,10 @@ interface Filter<T = any> {
 }
 
 const useFilters = <T extends Filter>(
-  initial: T = {} as T
+  initial: T = {} as T,
 ): [T, (modifier: (filters: T) => T) => void, () => void] => {
   const [filter, setFilter] = useState<T>(initial);
-  const initialFilter = useMemo(() => initial, []);
+  const initialFilter = useMemo(() => initial, [initial]);
 
   const updateFilter = (modifier: (filters: T) => T) => {
     setFilter(modifier(filter));

@@ -26,7 +26,7 @@ const Gauge: React.FC<GaugeProps> = ({
 
   const getSectionWidth = useCallback(() => {
     return 2;
-  }, [numSections]);
+  }, []);
 
   return (
     <div className="flex flex-row gap-x-0.5 w-full h-full">
