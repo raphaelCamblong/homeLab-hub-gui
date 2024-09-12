@@ -40,6 +40,10 @@ const config = {
       },
       colors: {
         'regal-blue': '#a5b4fc',
+        'indigo-dye': '#2B4162',
+        'sandy-brown': '#FA9F42',
+        'falu-red': '#721817',
+        'dartmouth-green': '#0B6E4F',
         'green-pastel': '#77DD76',
         'red-pastel': '#FF6962',
       },
