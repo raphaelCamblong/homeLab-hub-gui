@@ -14,14 +14,18 @@ RUN pnpm build
 
 FROM node:18.20.4-alpine3.20
 
-RUN npm install -g pnpm
-
 WORKDIR /app
 
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /src/.next ./.next
+COPY --from=builder /src/public ./public
+COPY --from=builder /src/node_modules ./node_modules
+COPY --from=builder /src/package.json ./package.json
+
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV PORT=3000
 
 EXPOSE 3000
 
-CMD ["pnpm", "start"]
+
+CMD ["npm", "start"]
