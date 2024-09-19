@@ -156,7 +156,7 @@ function Power() {
                 });
               }}
             />
-            <YAxis dataKey="Average" />
+            <YAxis dataKey="Peak" />
             <ChartTooltip
               content={
                 <ChartTooltipContent
