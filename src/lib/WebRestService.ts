@@ -1,12 +1,11 @@
 import { Config } from "@/services/backend/types";
 
 class WebRestService {
-  private readonly token: string;
+  private token: string;
 
   constructor(private readonly baseUrl: string) {
-    console.log("WebRestService constructor", baseUrl);
     this.baseUrl = baseUrl;
-    this.token = process.env.NEXT_PUBLIC_ENV_BO_API_TOKEN ?? "";
+    this.token = process.env["NEXT_PUBLIC_ENV_BO_API_TOKEN"] ?? "";
   }
 
   public async getConfig(): Promise<Config> {
@@ -34,35 +33,44 @@ class WebRestService {
 
   private async postData<T>(path: string, body: object): Promise<T> {
     const url = `${this.baseUrl}${path}`;
-    const response = await fetch(url, {
+    return fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-    });
-    if (!response.ok) {
-      throw new Error(`Network response was not ok: ${response.statusText}`);
-    }
-    return response.json();
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Network response was not ok: ${response.statusText}`,
+          );
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Error fetching:", error);
+        throw error;
+      });
   }
 
   private async fetchData<T>(path: string): Promise<T> {
     const url = `${this.baseUrl}${path}`;
-    const response = await fetch(url, {
+    return fetch(url, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${this.token}`,
       },
-      cache: "force-cache",
-      next: {
-        revalidate: 60,
-      },
+      // cache: "force-cache",
+      // next: {
+      //   revalidate: 60,
+      // },
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
     });
-    if (!response.ok) {
-      throw new Error(`Network response was not ok: ${response.statusText}`);
-    }
-    return response.json();
   }
 }
 

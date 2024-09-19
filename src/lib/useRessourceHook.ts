@@ -17,21 +17,20 @@ const useResource = <T>(
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        setLoading(true);
-        const newData = await fetchFunction();
-        setData(newData);
-        setError(undefined);
-      } catch (err: any) {
-        pushNotification({ message: err.message, type: "error" });
-        setError(err.message.toString());
-        setData(undefined);
-      } finally {
-        // pushNotification({ message: "data retrieved", type: "info" });
-        setLoading(false);
-      }
+      setLoading(true);
+      fetchFunction()
+        .then((res) => {
+          setData(res);
+          setError(undefined);
+        })
+        .catch((err) => {
+          pushNotification({ message: err.message, type: "error" });
+          setError(err.message.toString());
+          setData(undefined);
+        })
+        .finally(() => setLoading(false));
     };
-    fetchData().then(() => {});
+    fetchData().then((r) => r);
   }, []);
 
   return { data, isLoading, isError };
