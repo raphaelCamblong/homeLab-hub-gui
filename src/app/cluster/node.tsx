@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Loader } from "@/components/ui/loader";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@radix-ui/react-checkbox";
 
 const NodeCard: React.FC<{ vm: VM }> = ({ vm }) => {
   console.log(vm);
@@ -34,6 +35,7 @@ const NodeCard: React.FC<{ vm: VM }> = ({ vm }) => {
             ) : (
               <PowerOff color="red" />
             )}
+            <Checkbox />
           </div>
           <div className="text-sm text-gray-500">
             {new Date(vm.creation.date).toLocaleString()}
@@ -72,17 +74,19 @@ function CloudNode() {
   const { data: vms, isLoading, isError } = useVms();
   const [serverNode, setServerNode] = React.useState<VM[]>([]);
   const [agentNode, setAgentNode] = React.useState<VM[]>([]);
+  const [otherNode, setotherNode] = React.useState<VM[]>([]);
 
   useEffect(() => {
     if (vms) {
-      const serverNode = vms.filter((vm) => vm.name_label.startsWith("Server"));
-      const agentNode = vms.filter((vm) => vm.name_label.startsWith("Agent"));
-
-      setServerNode(serverNode);
-      setAgentNode(agentNode);
-      if (serverNode.length === 0 && agentNode.length === 0) {
-        setServerNode(vms);
-      }
+      setServerNode(vms.filter((vm) => vm.name_label.startsWith("Server")));
+      setAgentNode(vms.filter((vm) => vm.name_label.startsWith("Agent")));
+      setotherNode(
+        vms.filter(
+          (vm) =>
+            !vm.name_label.startsWith("Agent") &&
+            !vm.name_label.startsWith("Server"),
+        ),
+      );
     }
   }, [vms]);
 
@@ -91,6 +95,13 @@ function CloudNode() {
       {isLoading && <Loader />}
       {isError && <div>Failed to load VMs</div>}
 
+      <h1>External Database & others</h1>
+      <Separator className={"w-full h-0.5 bg-black rounded"} />
+      <div className={"flex flex-row flex-wrap gap-4"}>
+        {otherNode.map((vm) => (
+          <NodeCard key={vm.id} vm={vm} />
+        ))}
+      </div>
       <h1>Server nodes</h1>
       <div className={"flex flex-row flex-wrap gap-4"}>
         {serverNode.map((vm) => (
