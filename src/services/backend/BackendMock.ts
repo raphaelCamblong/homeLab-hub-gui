@@ -1,14 +1,20 @@
-import { Host, Power, Service, Thermal, VM } from "./types";
+import { AuthResponse, Host, Power, Service, Thermal, VM } from "./types";
 import WebRestService from "@/lib/WebRestService";
 import IBackend from "./IBackend";
 
 class BackendMock extends WebRestService implements IBackend {
-  public async login(username: string, password: string): Promise<boolean> {
-    return true;
+  public async login(
+    username: string,
+    password: string,
+  ): Promise<AuthResponse> {
+    return { "x-auth-token": `Bearer ${username}:${password}` };
   }
 
-  public async register(username: string, password: string): Promise<boolean> {
-    return true;
+  public async register(
+    username: string,
+    password: string,
+  ): Promise<AuthResponse> {
+    return { "x-auth-token": `Bearer ${username}:${password}` };
   }
 
   public async getAllServices(): Promise<Service[]> {

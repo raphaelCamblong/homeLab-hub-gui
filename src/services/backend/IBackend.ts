@@ -1,9 +1,16 @@
-import { Host, Power, Service, Thermal, VM } from "@/services/backend/types";
+import {
+  AuthResponse,
+  Host,
+  Power,
+  Service,
+  Thermal,
+  VM,
+} from "@/services/backend/types";
 
 interface IBackend {
-  login(username: string, password: string): Promise<boolean>;
+  login(username: string, password: string): Promise<AuthResponse>;
 
-  register(username: string, password: string): Promise<boolean>;
+  register(username: string, password: string): Promise<AuthResponse>;
 
   getAllServices(): Promise<Service[]>;
 

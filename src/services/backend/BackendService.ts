@@ -1,32 +1,41 @@
 "use client";
-import { Host, Power, Service, Thermal, VM } from "./types";
+import { AuthResponse, Host, Power, Service, Thermal, VM } from "./types";
 import WebRestService from "@/lib/WebRestService";
 import IBackend from "./IBackend";
-import bcrypt from "bcryptjs";
 
 class BackendService extends WebRestService implements IBackend {
-  public async login(username: string, password: string): Promise<boolean> {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    return await this.post<boolean>("/auth/login", {
+  public async login(
+    username: string,
+    password: string,
+  ): Promise<AuthResponse> {
+    // const hashedPassword = await bcrypt.hash(password, 10);
+    return this.post<AuthResponse>("/login", {
       username,
-      hashedPassword,
+      password: password,
+    }).then((res) => {
+      this.dropAuthToken();
+      this.saveAuthToken(res["x-auth-token"]);
+      return res;
     });
   }
 
-  public async register(username: string, password: string): Promise<boolean> {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    return await this.post<boolean>("/auth/register", {
+  public async register(
+    username: string,
+    password: string,
+  ): Promise<AuthResponse> {
+    // const hashedPassword = await bcrypt.hash(password, 10);
+    return this.post<AuthResponse>("/register", {
       username,
-      hashedPassword,
+      password: password,
+    }).then((res) => {
+      this.dropAuthToken();
+      this.saveAuthToken(res["x-auth-token"]);
+      return res;
     });
   }
 
   public async getAllServices(): Promise<Service[]> {
-    const services = await this.get<Service[]>(`/service/services`);
-    services.forEach((service: Service) => {
-      service.tags = service.tags.split(",");
-    });
-    return services;
+    return await this.get<Service[]>(`/service/services`);
   }
 
   public async getThermal(): Promise<Thermal> {

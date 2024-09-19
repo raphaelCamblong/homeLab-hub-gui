@@ -5,7 +5,7 @@ export interface Service {
   name: string;
   url: string;
   description: string;
-  tags: string | string[];
+  tags: string[];
   logo_path?: string;
   state?: ServiceState;
   createdAt?: string;
