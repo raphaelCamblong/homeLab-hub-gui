@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { MonitorCheck, MonitorStop, SlidersHorizontal } from "lucide-react";
 import {
@@ -38,7 +38,7 @@ const ServiceFilters: React.FC<ServiceFiltersProps> = ({
   ]);
   const [selectedTags, setSelectedTags] = useState<string>("");
 
-  updateFilters(() => {
+  const updateFilters = useCallback(() => {
     setFilters((filters: Filter) => {
       return { ...filters, state: selectedStates, tags: selectedTags };
     });
