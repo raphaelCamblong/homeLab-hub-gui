@@ -1,5 +1,5 @@
 "use client";
-import { Bell, Cable, Cloud, MemoryStick } from "lucide-react";
+import { Bell, Cable, Cloud, MemoryStick, ScanEye } from "lucide-react";
 
 import React, { useMemo, useState } from "react";
 import { Links, Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
@@ -31,6 +31,11 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
         icon: <Bell className={iconclassName} />,
         label: "Notifications",
         href: "/notifications",
+      },
+      {
+        icon: <ScanEye className={iconclassName} />,
+        label: "Login",
+        href: "/auth/login",
       },
     ],
     [],
