@@ -3,11 +3,13 @@ export type Services = Service[];
 export interface Service {
   id: string;
   name: string;
-  url: string;
+  status: 'active' | 'inactive';
+  url?: string;
   description: string;
-  tags: string[];
+  tags?: string;
   logo_path?: string;
-  state?: ServiceState;
+  state: "running" | "stopped";
+  lastUpdated?: string;
   createdAt?: string;
   updatedAt?: string;
 }

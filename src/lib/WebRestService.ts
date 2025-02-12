@@ -1,4 +1,4 @@
-import { Config } from "@/services/backend/types";
+import { Config } from "@/lib/services/backend/types";
 
 class WebRestService {
   private token: string;
