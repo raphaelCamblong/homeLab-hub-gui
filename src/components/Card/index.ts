@@ -1,3 +1,3 @@
 export * from './FanCard';
 export * from './TemperatureCard';
-export * from './ServiceCard';
+export * from '../../app/(app)/service/components/ServiceCard';

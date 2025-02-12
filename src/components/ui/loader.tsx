@@ -1,12 +1,16 @@
-import * as React from "react";
-import { Loader as LoaderIcon } from "lucide-react";
+import { Loader2, LucideProps } from "lucide-react"
+import { cn } from "@/lib/utils"
 
-const Loader: React.FC = () => {
+interface LoaderProps extends Omit<LucideProps, "ref"> {
+  size?: number
+}
+
+export function Loader({ size = 24, className, ...props }: LoaderProps) {
   return (
-    <div className="flex justify-center">
-      <LoaderIcon size={34} className="animate-spin" />
-    </div>
-  );
-};
-
-export { Loader };
+    <Loader2
+      className={cn("animate-spin", className)}
+      size={size}
+      {...props}
+    />
+  )
+}
