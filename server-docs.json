@@ -1,0 +1,1698 @@
+{
+    "schemes": ["http"],
+    "swagger": "2.0",
+    "info": {
+        "description": "HomeLab API specification",
+        "title": "HomeLab API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "email": "balajichandrasekar17@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "127.0.0.1:8080",
+    "basePath": "/",
+    "paths": {
+        "/api/v1/actions": {
+            "get": {
+                "description": "Get all actions with their steps",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "List all actions",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new action with the provided information",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Create a new action",
+                "parameters": [
+                    {
+                        "description": "Action object",
+                        "name": "action",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/actions/pending": {
+            "get": {
+                "description": "Get all actions with pending status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Get pending actions",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/actions/running": {
+            "get": {
+                "description": "Get all actions with running status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Get running actions",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/actions/{actionId}/steps/{stepId}/status": {
+            "put": {
+                "description": "Update the status and log of a step in an action",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Update step status",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Action ID",
+                        "name": "actionId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Step ID",
+                        "name": "stepId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Status update object",
+                        "name": "status",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Step status updated successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/actions/{id}": {
+            "get": {
+                "description": "Get a single action by its ID with all steps",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Get an action by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Action ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update an action with the provided information",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Update an action",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Action ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Action object",
+                        "name": "action",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete an action by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Delete an action",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Action ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Action deleted successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/actions/{id}/complete": {
+            "post": {
+                "description": "Mark an action as completed with results",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Complete an action",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Action ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Result object",
+                        "name": "result",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Action completed successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/actions/{id}/run": {
+            "post": {
+                "description": "Start execution of an action",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Run an action",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Action ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/actions/{id}/steps": {
+            "post": {
+                "description": "Add a new step to an existing action",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "actions"
+                ],
+                "summary": "Add a step to an action",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Action ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Step object",
+                        "name": "step",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionStep"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Step added successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "description": "Authenticate user and return JWT token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "User login",
+                "parameters": [
+                    {
+                        "description": "Login credentials",
+                        "name": "credentials",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.UserCredentials"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "JWT token",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.AuthResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request format",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/logout": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Invalidate user's current session",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "User logout",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/register": {
+            "post": {
+                "description": "Create a new user account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "authentication"
+                ],
+                "summary": "Register new user",
+                "parameters": [
+                    {
+                        "description": "User registration details",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.UserCredentials"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "JWT token",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.AuthResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request format or validation error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/services": {
+            "get": {
+                "description": "Get all services",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "services"
+                ],
+                "summary": "List all services",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ServiceEntity"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new service with the provided information",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "services"
+                ],
+                "summary": "Create a new service",
+                "parameters": [
+                    {
+                        "description": "Service object",
+                        "name": "service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ServiceEntity"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ServiceEntity"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/services/{id}": {
+            "get": {
+                "description": "Get a single service by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "services"
+                ],
+                "summary": "Get a service by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Service ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ServiceEntity"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a service with the provided information",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "services"
+                ],
+                "summary": "Update a service",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Service ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Service object",
+                        "name": "service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ServiceEntity"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ServiceEntity"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a service by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "services"
+                ],
+                "summary": "Delete a service",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Service ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Service deleted successfully",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get paginated list of all users",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "List all users",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Items per page",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "page": {
+                                    "type": "integer"
+                                },
+                                "page_size": {
+                                    "type": "integer"
+                                },
+                                "total": {
+                                    "type": "integer"
+                                },
+                                "users": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.UserResponse"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/api-keys": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get all API keys for the authenticated user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api-keys"
+                ],
+                "summary": "List API keys",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.APIKey"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create a new API key for the authenticated user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api-keys"
+                ],
+                "summary": "Create API key",
+                "parameters": [
+                    {
+                        "description": "API key details",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.APIKey"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request format",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/api-keys/{keyId}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Revoke a specific API key",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "api-keys"
+                ],
+                "summary": "Revoke API key",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "API Key ID",
+                        "name": "keyId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "API key revoked successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/audit-logs": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get paginated audit logs for the authenticated user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "audit"
+                ],
+                "summary": "Get user audit logs",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Items per page",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "logs": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.AuditLog"
+                                    }
+                                },
+                                "page": {
+                                    "type": "integer"
+                                },
+                                "page_size": {
+                                    "type": "integer"
+                                },
+                                "total": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/me": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get details of the currently authenticated user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get current user details",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.UserResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get details of a specific user by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get user details",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.UserResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}/roles": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get all roles assigned to a specific user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "roles"
+                ],
+                "summary": "Get user roles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.Role"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}/roles/{roleId}": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Assign a specific role to a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "roles"
+                ],
+                "summary": "Assign role to user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Role ID",
+                        "name": "roleId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Role assigned successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Remove a specific role from a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "roles"
+                ],
+                "summary": "Remove role from user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Role ID",
+                        "name": "roleId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Role removed successfully",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.APIInfo": {
+            "type": "object",
+            "properties": {
+                "base_url": {
+                    "type": "string"
+                },
+                "openapi_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.APIKey": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "expires_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "last_used_at": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.ActionEntity": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "ended_at": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "started_at": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionStatus"
+                },
+                "steps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.ActionStep"
+                    }
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.ActionStatus": {
+            "type": "string",
+            "enum": [
+                "pending",
+                "running",
+                "completed",
+                "failed",
+                "stopped"
+            ],
+            "x-enum-varnames": [
+                "ActionPending",
+                "ActionRunning",
+                "ActionCompleted",
+                "ActionFailed",
+                "ActionStopped"
+            ]
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.ActionStep": {
+            "type": "object",
+            "properties": {
+                "action_id": {
+                    "type": "integer"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "ended_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "log": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "started_at": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.StepStatus"
+                },
+                "step_order": {
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.AuditLog": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "details": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ip_address": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "resource_id": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "user_agent": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.AuthResponse": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.UserResponse"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.Metadata": {
+            "type": "object",
+            "properties": {
+                "environment": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.Observability": {
+            "type": "object",
+            "properties": {
+                "deployed_at": {
+                    "type": "string"
+                },
+                "health_status": {
+                    "type": "string"
+                },
+                "last_checked_at": {
+                    "type": "string"
+                },
+                "latency_ms": {
+                    "type": "integer"
+                },
+                "uptime_percent": {
+                    "type": "number"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.Permission": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "description": "create, read, update, delete",
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.Role": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.Permission"
+                    }
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.Security": {
+            "type": "object",
+            "properties": {
+                "auth_required": {
+                    "type": "boolean"
+                },
+                "tls": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.ServiceEntity": {
+            "type": "object",
+            "properties": {
+                "api_info": {
+                    "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.APIInfo"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ip": {
+                    "type": "string"
+                },
+                "logo_url": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "description": "Subcategories",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.Metadata"
+                        }
+                    ]
+                },
+                "name": {
+                    "description": "Required core fields",
+                    "type": "string"
+                },
+                "namespace": {
+                    "type": "string"
+                },
+                "observability": {
+                    "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.Observability"
+                },
+                "port": {
+                    "type": "integer"
+                },
+                "security": {
+                    "$ref": "#/definitions/homelab_com_homelab-server_homeLab-server_internal_entities.Security"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "Optional",
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.StepStatus": {
+            "type": "string",
+            "enum": [
+                "pending",
+                "running",
+                "success",
+                "failed",
+                "skipped"
+            ],
+            "x-enum-varnames": [
+                "StepPending",
+                "StepRunning",
+                "StepSuccess",
+                "StepFailed",
+                "StepSkipped"
+            ]
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.UserCredentials": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "homelab_com_homelab-server_homeLab-server_internal_entities.UserResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

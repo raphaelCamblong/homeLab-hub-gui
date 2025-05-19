@@ -3,12 +3,14 @@ import { cn } from "@/lib/utils";
 import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, ChevronUp, Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export interface Links {
   label: string;
   href: string;
   icon: React.JSX.Element | React.ReactNode;
+  children?: Links[];
 }
 
 interface SidebarContextProps {
@@ -158,35 +160,89 @@ export const MobileSidebar = ({
 export const SidebarLink = ({
   link,
   className,
-  selected = false,
+  disabled,
   ...props
 }: {
   link: Links;
   className?: string;
-  selected?: boolean;
+  disabled?: boolean;
   props?: LinkProps;
 }) => {
   const { open, animate } = useSidebar();
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const pathname = usePathname();
+  const selected = pathname === link.href;
+
+  React.useEffect(() => {
+    if (!open) {
+      setIsExpanded(false);
+    }
+  }, [open]);
+
+  const toggleExpand = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!disabled) {
+      setIsExpanded((prev) => !prev);
+    }
+  };
+
   return (
-    <Link
-      href={link.href}
-      className={cn(
-        "flex items-center justify-start gap-2 group/sidebar py-2",
-        selected ? "text-regal-blue" : "text-neutral-700",
-        className
+    <div className="flex flex-col">
+      <div className="flex items-center justify-between">
+        <Link
+          href={link.href}
+          className={cn(
+            "flex items-center gap-2 group/sidebar py-2 flex-1",
+            selected ? "text-regal-blue" : "text-neutral-700",
+            disabled && "opacity-50 cursor-not-allowed pointer-events-none",
+            className
+          )}
+          onClick={(e) => disabled && e.preventDefault()}
+          {...props}
+        >
+          <motion.div className="flex items-center gap-2">
+            {link.icon}
+            <motion.span
+              animate={{
+                display: animate
+                  ? open
+                    ? "inline-block"
+                    : "none"
+                  : "inline-block",
+                opacity: animate ? (open ? 1 : 0) : 1,
+              }}
+              className="dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+            >
+              {link.label}
+            </motion.span>
+          </motion.div>
+        </Link>
+        {link.children && open && (
+          <button
+            onClick={toggleExpand}
+            className={cn(
+              "text-neutral-600 hover:text-neutral-900 transition hover:scale-110",
+              disabled && "opacity-50 cursor-not-allowed"
+            )}
+            disabled={disabled}
+          >
+            {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          </button>
+        )}
+      </div>
+
+      {link.children && isExpanded && (
+        <motion.div className="flex flex-col pl-7">
+          {link.children.map((child, i) => (
+            <SidebarLink
+              key={i}
+              link={child}
+              className="py-1"
+              disabled={disabled}
+            />
+          ))}
+        </motion.div>
       )}
-      {...props}
-    >
-      {link.icon}
-      <motion.span
-        animate={{
-          display: animate ? (open ? "inline-block" : "none") : "inline-block",
-          opacity: animate ? (open ? 1 : 0) : 1,
-        }}
-        className=" dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
-      >
-        {link.label}
-      </motion.span>
-    </Link>
+    </div>
   );
 };

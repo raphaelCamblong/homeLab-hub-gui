@@ -1,35 +1,50 @@
-import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-export default async function middleware(req: NextRequest) {
-  // 2. Check if the current route is protected or public
-  // const path = req.nextUrl.pathname;
-  // const isProtectedRoute = protectedRoutes.includes(path);
-  // const isPublicRoute = publicRoutes.includes(path);
+export async function middleware(request: NextRequest) {
+  const path = request.nextUrl.pathname;
 
-  // 3. Decrypt the session from the cookie
-  const cookieSession = cookies().get("session")?.value;
-  const session = cookieSession ? deserialize(cookieSession) : undefined;
+  const session = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
 
-  console.log("Session middleware", session);
-  // // 5. Redirect to /login if the user is not authenticated
-  // if (isProtectedRoute && !session?.userId) {
-  //   return NextResponse.redirect(new URL("/login", req.nextUrl));
-  // }
-  //
-  // // 6. Redirect to /dashboard if the user is authenticated
-  // if (
-  //   isPublicRoute &&
-  //   session?.userId &&
-  //   !req.nextUrl.pathname.startsWith("/dashboard")
-  // ) {
-  //   return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+  const publicPaths = ["/", "/auth/login"];
+  const isPublicPath = publicPaths.includes(path);
+
+  if (isPublicPath && session) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  if (!isPublicPath && !session) {
+    return NextResponse.redirect(new URL("/auth/login", request.url));
+  }
+
+  const roleBasedPaths = {
+    "/monitoring": ["admin", "operator"],
+    "/monitoring/cluster": ["admin"],
+    "/monitoring/nas": ["admin", "operator"],
+  };
+
+  const requiredRoles = Object.entries(roleBasedPaths).find(([route]) =>
+    path.startsWith(route),
+  )?.[1];
+
+  console.log("requiredRoles", requiredRoles);
+
+  // if (requiredRoles && !requiredRoles.includes(session?.role as string)) {
+  //   return NextResponse.redirect(new URL("/unauthorized", request.url));
   // }
 
   return NextResponse.next();
 }
 
-// Routes Middleware should not run on
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  matcher: [
+    "/dashboard/:path*",
+    "/monitoring/:path*",
+    "/service/:path*",
+    "/notifications/:path*",
+  ],
 };

@@ -1,0 +1,33 @@
+"use client";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Terminal, Trash } from "lucide-react";
+import { Notification } from "@/lib/store/notificationStore";
+import { useNotification } from "@/lib/hooks/useNotification";
+
+interface NotificationItemProps {
+    item: Notification;
+}
+
+export const NotificationItem: React.FC<NotificationItemProps> = ({ item }) => {
+    const { removeNotification } = useNotification();
+    const color = item.type === "success" ? "green-pastel" : "red-pastel";
+
+    return (
+        <Alert>
+            <Terminal className="h-4 w-4" />
+            <AlertTitle className={`text-${color}`}>
+                {item.type} - {item.id}
+            </AlertTitle>
+            <AlertDescription>
+                <div className="flex flex-row justify-between">
+                    {item.message}
+                    <Button onClick={() => removeNotification(item.id!)}>
+                        <Trash />
+                    </Button>
+                </div>
+            </AlertDescription>
+        </Alert>
+    );
+}; 

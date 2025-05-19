@@ -1,11 +1,7 @@
 "use client";
-import { Metadata } from "next";
+import React from "react";
 import { motion } from "framer-motion";
 import { LogoDefault } from "@/components/Logo";
-
-const metadata: Metadata = {
-  title: "Home",
-};
 
 export default function Home() {
   return (

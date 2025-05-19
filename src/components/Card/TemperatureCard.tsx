@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Temperature } from "@/services/backend/types";
+import { Temperature } from "@/lib/services/backend/types";
 import { Gauge } from "@/components/ui/gauge";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import {
