@@ -234,7 +234,12 @@ export const SidebarLink = ({
       {link.children && isExpanded && (
         <motion.div className="flex flex-col pl-7">
           {link.children.map((child, i) => (
-            <SidebarLink key={i} link={child} className="py-1" disabled={disabled} />
+            <SidebarLink
+              key={i}
+              link={child}
+              className="py-1"
+              disabled={disabled}
+            />
           ))}
         </motion.div>
       )}

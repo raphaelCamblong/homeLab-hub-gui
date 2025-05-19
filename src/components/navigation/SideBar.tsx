@@ -1,16 +1,35 @@
 "use client";
-import { Bell, Cable, Cloud, DatabaseZap, HeartPulse, Home, LogOut } from "lucide-react";
-import React, { useMemo } from "react";
+import {
+  Bell,
+  HardDrive,
+  Gauge,
+  Database,
+  Activity,
+  Home,
+  LogOut,
+  Server,
+  Network,
+  Cpu,
+  PlayCircle,
+  FolderOpen,
+  Settings,
+  Boxes,
+  BringToFront,
+  Building2,
+  UserRoundCog,
+} from "lucide-react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Links, Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 import { useAuth } from "@/lib/hooks/useAuth";
 import { Logo } from "../Logo";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export function AppSidebar({ children }: { children: React.ReactNode }) {
   const { user, isLoading, logout } = useAuth();
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   const iconClassName = "h-5 w-5 flex-shrink-0";
   const links: Links[] = useMemo(
@@ -21,26 +40,58 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
         href: "/dashboard",
       },
       {
-        icon: <HeartPulse className={iconClassName} />,
-        label: "Monitoring",
-        href: "/monitoring",
+        icon: <Building2 className={iconClassName} />,
+        label: "Infra",
+        href: "/infrastructure",
         children: [
           {
-            icon: <Cloud className={iconClassName} />,
-            label: "Cluster",
-            href: "/monitoring/cluster",
+            icon: <Server className={iconClassName} />,
+            label: "Devices",
+            href: "/infrastructure/devices",
           },
           {
-            icon: <DatabaseZap className={iconClassName} />,
-            label: "Nas",
-            href: "/monitoring/nas",
+            icon: <Network className={iconClassName} />,
+            label: "Network",
+            href: "/infrastructure/network",
+          },
+          {
+            icon: <Activity className={iconClassName} />,
+            label: "Monitoring",
+            href: "/monitoring",
+            children: [
+              {
+                icon: <Boxes className={iconClassName} />,
+                label: "Cluster",
+                href: "/monitoring/cluster",
+              },
+              {
+                icon: <Database className={iconClassName} />,
+                label: "Nas",
+                href: "/monitoring/nas",
+              },
+            ],
           },
         ],
       },
       {
-        icon: <Cable className={iconClassName} />,
+        icon: <Boxes className={iconClassName} />,
+        label: "Cluster",
+        href: "/cluster",
+      },
+      {
+        icon: <PlayCircle className={iconClassName} />,
         label: "Services",
-        href: "/service",
+        href: "/services",
+      },
+      {
+        icon: <BringToFront className={iconClassName} />,
+        label: "Pipelines",
+        href: "/pipeline",
+      },
+      {
+        icon: <FolderOpen className={iconClassName} />,
+        label: "Storage",
+        href: "/storage",
       },
       {
         icon: <Bell className={iconClassName} />,
@@ -51,28 +102,38 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
     [user]
   );
 
+  const authLinks: Links[] = useMemo(() => {
+    if (user?.roles.includes("admin")) {
+      return [
+        {
+          icon: <UserRoundCog className={iconClassName} />,
+          label: "Admin",
+          href: "/admin",
+        },
+      ];
+    }
+    return [];
+  }, [user?.roles]);
+
   const handleLogout = async () => {
     await logout();
-    router.push('/');
+    router.push("/");
   };
-
-  const [open, setOpen] = React.useState(false);
 
   return (
     <div className="h-screen rounded-md flex flex-col md:flex-row bg-gray-10 dark:bg-neutral-800 w-full flex-1 mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden">
       <Sidebar open={open} setOpen={setOpen} animate={true}>
         <SidebarBody className="flex flex-col h-full">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-            <Link href={user ? "/dashboard" : "#"}>
+            <div className="block">
               <Logo />
-            </Link>
+            </div>
             <div className="mt-8 flex flex-col gap-2">
               {links.map((link, idx) => (
-                <SidebarLink
-                  key={idx}
-                  link={link}
-                  disabled={!user}
-                />
+                <SidebarLink key={idx} link={link} disabled={!user} />
+              ))}
+              {authLinks.map((link, idx) => (
+                <SidebarLink key={idx} link={link} disabled={!user} />
               ))}
             </div>
           </div>
