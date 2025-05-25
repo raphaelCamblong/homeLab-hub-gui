@@ -21,22 +21,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
-  const roleBasedPaths = {
-    "/monitoring": ["admin", "operator"],
-    "/monitoring/cluster": ["admin"],
-    "/monitoring/nas": ["admin", "operator"],
-  };
-
-  const requiredRoles = Object.entries(roleBasedPaths).find(([route]) =>
-    path.startsWith(route),
-  )?.[1];
-
-  console.log("requiredRoles", requiredRoles);
-
-  // if (requiredRoles && !requiredRoles.includes(session?.role as string)) {
-  //   return NextResponse.redirect(new URL("/unauthorized", request.url));
-  // }
-
   return NextResponse.next();
 }
 
