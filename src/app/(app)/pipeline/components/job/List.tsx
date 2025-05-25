@@ -19,7 +19,6 @@ const areJobStepsEqual = (a: Step[], b: Step[]) => {
 };
 
 const MemoizeJobCard = React.memo(JobCard, (prevProps, nextProps) => {
-  // console.log("MemoizeJobCard", prevProps, nextProps);
   return (
     prevProps.job.ID === nextProps.job.ID &&
     prevProps.job.status === nextProps.job.status &&
@@ -33,7 +32,6 @@ const RunningJobList = () => {
   const [connectionError, setConnectionError] = useState<string | null>(null);
 
   const handleJobUpdate = useCallback((job: Job) => {
-    console.log("handleJobUpdate incoming data =>", job);
     setJobs((prevMap) => {
       const newMap = new Map(prevMap);
       if (job.status === "running") {
@@ -50,7 +48,6 @@ const RunningJobList = () => {
 
     const setupSSEConnection = () => {
       if (eventSource) {
-        console.log("[Client] Closing existing connection");
         eventSource.close();
       }
       setConnectionError(null);
@@ -65,7 +62,6 @@ const RunningJobList = () => {
       });
 
       eventSource.onopen = (event) => {
-        console.log("[Client] Connection opened:", event);
         setConnectionError(null);
       };
 
@@ -73,7 +69,6 @@ const RunningJobList = () => {
         console.error("[Client] Connection error:", event);
         setConnectionError("Connection lost. Retrying...");
         if (eventSource?.readyState === EventSource.CLOSED) {
-          console.log("[Client] Connection closed, will retry");
           eventSource.close();
         }
       };
@@ -86,7 +81,7 @@ const RunningJobList = () => {
         eventSource.close();
       }
     };
-  }, []);
+  }, [handleJobUpdate]);
 
   return (
     <div>

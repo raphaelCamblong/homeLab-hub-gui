@@ -9,6 +9,8 @@ import Link from "next/link";
 import { pipelinesApi } from "@/lib/api/pipelines";
 import { Status } from "@/types/api/pipeline";
 
+export const dynamic = "force-dynamic";
+
 async function getHistory() {
   try {
     const history = await pipelinesApi.getAllJobs();
@@ -29,21 +31,24 @@ export default async function HistoryPage() {
   return (
     <WithPermission permission="canViewMonitoring" fallback={<AccessDenied />}>
       <PageContainer>
-        <div className="flex items-center gap-4 mb-6">
-          <Button variant="outline" size="sm" asChild>
-            <Link href="/pipeline">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to pipelines
-            </Link>
-          </Button>
-          <PageTitle
-            title="Pipelines History"
-            icon={<History className="h-6 w-6" />}
-            description="View the history of system pipelines"
-          />
-        </div>
+        <PageTitle
+          title="Pipelines History"
+          icon={<History className="h-6 w-6" />}
+        >
+          <div className="flex items-center gap-4">
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/pipeline">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to pipelines
+              </Link>
+            </Button>
+            <p className="text-sm text-muted-foreground">
+              View the history of system pipelines
+            </p>
+          </div>
+        </PageTitle>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {history.length === 0 ? (
             <div className="col-span-full flex min-h-[400px] items-center justify-center rounded-lg border border-dashed">
               <div className="text-center">
