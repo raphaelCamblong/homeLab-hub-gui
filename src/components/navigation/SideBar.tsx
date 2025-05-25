@@ -99,11 +99,11 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
         href: "/notifications",
       },
     ],
-    [user]
+    []
   );
 
   const authLinks: Links[] = useMemo(() => {
-    if (user?.roles.includes("admin")) {
+    if (user?.roles.some((role) => role.name === "admin")) {
       return [
         {
           icon: <UserRoundCog className={iconClassName} />,
@@ -138,16 +138,19 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
             </div>
           </div>
 
-          <div className="mt-auto pt-4 border-t border-neutral-200 dark:border-neutral-700">
+          <div className="mt-auto pt-4 border-t border-neutral-200 dark:border-neutral-700 flex justify-center">
             {user ? (
-              <Button
-                variant="ghost"
-                className="w-full justify-start gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/50"
-                onClick={handleLogout}
-              >
-                <LogOut className={iconClassName} />
-                {/* <span>Logout</span> */}
-              </Button>
+              <div className="flex flex-col">
+                <div className="flex items-center justify-between">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/50"
+                    onClick={handleLogout}
+                  >
+                    <LogOut className={iconClassName} />
+                  </Button>
+                </div>
+              </div>
             ) : (
               <SidebarLink
                 link={{
