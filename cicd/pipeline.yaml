@@ -33,9 +33,9 @@ spec:
         - name: deleteExisting
           value: "true"
 
-    - name: update-version
+    - name: update-version-npm
       taskRef:
-        name: update-version
+        name: update-version-npm
       runAfter:
         - git-clone
       workspaces:
