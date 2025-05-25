@@ -67,7 +67,7 @@ export async function RolesManagement() {
             </TableHeader>
             <TableBody>
               {roles.map((role: Role) => (
-                <Tooltip>
+                <Tooltip key={role.ID}>
                   <TooltipTrigger asChild>
                     <TableRow key={role.name}>
                       <TableCell>

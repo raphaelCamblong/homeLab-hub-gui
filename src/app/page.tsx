@@ -2,8 +2,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { LogoDefault } from "@/components/Logo";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+  const { data: session } = useSession();
+  const user = session?.user;
+
   return (
     <div className="flex w-full h-full justify-center">
       <motion.div
@@ -15,6 +20,17 @@ export default function Home() {
       >
         <LogoDefault size={100} />
         <h1 className="text-4xl">Welcome !</h1>
+        {user ? (
+          <p className="text-sm text-muted-foreground">
+            Nice to see you {user.name}
+          </p>
+        ) : (
+          <Link href="/auth/login">
+            <p className="text-sm text-muted-foreground">
+              Please login to continue
+            </p>
+          </Link>
+        )}
       </motion.div>
     </div>
   );

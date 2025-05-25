@@ -16,8 +16,6 @@ const RBACContext = createContext<RBACContextType | undefined>(undefined);
 
 interface RBACProviderProps {
   children: ReactNode;
-  role: Role;
-  customPermissions?: Permission[];
 }
 
 export const RBACProvider = ({ children }: RBACProviderProps) => {

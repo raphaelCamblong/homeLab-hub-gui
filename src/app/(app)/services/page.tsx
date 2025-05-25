@@ -9,6 +9,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import { ServiceHeader } from "./components/ServiceHeader";
 import { ErrorAlert } from "@/components/ErrorAlert";
 
+export const dynamic = "force-dynamic";
+
 export default function ServicePage() {
   return (
     <WithPermission permission="canManageServices" fallback={<AccessDenied />}>

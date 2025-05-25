@@ -4,4 +4,3 @@ export * from "./Thermal";
 export * from "./Power";
 export * from "./Host";
 export * from "./Vm";
-export * from "./AuthResponse";

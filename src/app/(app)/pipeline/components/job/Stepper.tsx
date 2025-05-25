@@ -11,6 +11,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -46,6 +47,7 @@ interface StepNodeProps {
 }
 
 function StepNode({ step, position }: StepNodeProps) {
+  console.log("[StepNode]step", step);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -94,6 +96,10 @@ function StepNode({ step, position }: StepNodeProps) {
               {step.status}
             </Badge>
           </DialogTitle>
+          <DialogDescription>
+            {step.step_template?.description ||
+              "Step details and execution information"}
+          </DialogDescription>
         </DialogHeader>
         <StepDetails step={step} />
       </DialogContent>
@@ -118,6 +124,7 @@ function StepDetails({ step }: StepDetailsProps) {
             </Badge>
           </div>
         </DialogTitle>
+        <DialogDescription>{""}</DialogDescription>
       </DialogHeader>
 
       <Tabs defaultValue="overview" className="w-full">
@@ -180,11 +187,13 @@ function StepDetails({ step }: StepDetailsProps) {
 
         <TabsContent value="logs" className="space-y-4">
           <div className="h-[400px] bg-muted rounded-lg p-4 font-mono text-sm">
-            {step.log ? (
-              <pre className="whitespace-pre-wrap">{step.log}</pre>
-            ) : (
-              <p className="text-muted-foreground">No logs available</p>
-            )}
+            <ScrollArea className="h-[400px]">
+              {step.log ? (
+                <pre className="whitespace-pre-wrap">{step.log}</pre>
+              ) : (
+                <p className="text-muted-foreground">No logs available</p>
+              )}
+            </ScrollArea>
           </div>
         </TabsContent>
 
@@ -232,10 +241,7 @@ interface StepperProps {
 }
 
 export function Stepper({ steps }: StepperProps) {
-  const nodePositions = useMemo(
-    () => calculateNodePositions(steps),
-    [steps.length]
-  );
+  const nodePositions = useMemo(() => calculateNodePositions(steps), [steps]);
 
   return (
     <div className="relative bg-muted/50 rounded-xl p-4">

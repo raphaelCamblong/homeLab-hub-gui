@@ -17,7 +17,7 @@ export function JobCard({ job }: JobCardProps) {
   const progress = getProgressPercentage(job.steps);
   return (
     <Drawer>
-      <DrawerTrigger asChild>
+      <DrawerTrigger>
         <Card className="p-4 hover:shadow-lg transition-shadow cursor-pointer">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 min-w-0">

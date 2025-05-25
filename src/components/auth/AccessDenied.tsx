@@ -8,7 +8,7 @@ export function AccessDenied() {
       <Shield className="w-16 h-16 text-red-500" />
       <h1 className="text-2xl font-bold">Access Denied</h1>
       <p className="text-muted-foreground text-center max-w-md">
-        You don't have permission to access this page. Please contact your
+        You don&apos;t have permission to access this page. Please contact your
         administrator if you think this is a mistake.
       </p>
       <Button asChild>

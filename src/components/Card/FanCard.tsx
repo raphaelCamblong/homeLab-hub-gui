@@ -1,6 +1,5 @@
-"use client";
 import React from "react";
-import { Fan as FanType } from "@/lib/services/backend/types";
+import { Fan as FanType } from "@/types/api/Thermal";
 import { Fan } from "lucide-react";
 
 const FanCard: React.FC<{ fan: FanType }> = ({ fan }) => {

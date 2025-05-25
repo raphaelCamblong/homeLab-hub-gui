@@ -1,8 +1,8 @@
 import {
   DialogContent,
+  DialogClose,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Info, ListChecks, ChevronDown, Settings } from "lucide-react";
@@ -15,7 +15,6 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { CreateJobButton } from "../../actions/jobButton";
-import { DialogDescription } from "@radix-ui/react-dialog";
 
 interface PipelineDetailsProps {
   pipeline: PipelineTemplate;
@@ -119,14 +118,16 @@ export function PipelineDetails({ pipeline }: PipelineDetailsProps) {
           <p className="text-sm text-muted-foreground">
             Pipeline ID: <span className="font-mono">{pipeline.ID}</span>
           </p>
-          <CreateJobButton
-            pipelineId={pipeline.ID.toString()}
-            className="gap-2 bg-indigo-dye hover:bg-indigo-dye/90 text-white"
-            // disabled={pipeline.running_jobs.length > 0}
-            disabled={false}
-          >
-            Run Pipeline
-          </CreateJobButton>
+          <DialogClose>
+            <CreateJobButton
+              pipelineId={pipeline.ID.toString()}
+              className="gap-2 bg-indigo-dye hover:bg-indigo-dye/90 text-white"
+              // disabled={pipeline.running_jobs.length > 0}
+              disabled={false}
+            >
+              Run Pipeline
+            </CreateJobButton>
+          </DialogClose>
         </div>
       </div>
     </DialogContent>

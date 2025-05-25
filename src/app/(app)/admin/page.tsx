@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PageContainer, PageTitle } from "@/components/navigation/Page";
 import { WithPermission } from "@/components/auth/WithPermission";
@@ -9,6 +8,8 @@ import { RBACManagement } from "./components/RBACManagement";
 import { TokenManagement } from "./components/TokenManagement";
 import { AuditLogs } from "./components/AuditLogs";
 import ErrorBoundaryWithSuspense from "@/components/navigation/ErrorBoundaryWithSuspense";
+
+export const dynamic = "force-dynamic";
 
 export default function AdminPage({
   searchParams,

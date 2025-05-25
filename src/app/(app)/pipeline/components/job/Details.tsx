@@ -5,6 +5,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
+  DrawerDescription,
 } from "@/components/ui/drawer";
 import { Info, Clock, StopCircle, X } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -25,9 +26,7 @@ interface JobDetailsProps {
 export function JobDetails({ job }: JobDetailsProps) {
   const progress = getProgressPercentage(job.steps);
 
-  const currentStep =
-    job.steps.find((step) => step.status === Status.Running) ||
-    job.steps[job.steps.length - 1];
+  const currentStep = job.steps.find((step) => step.status === Status.Running);
 
   return (
     <DrawerContent className="h-[85vh] max-h-[85vh]">
@@ -47,6 +46,11 @@ export function JobDetails({ job }: JobDetailsProps) {
               </DrawerClose>
             </div>
           </div>
+          <DrawerDescription>
+            <div className="flex items-center gap-2">
+              <p className="text-sm text-muted-foreground">{job.result}</p>
+            </div>
+          </DrawerDescription>
         </DrawerHeader>
 
         {/* Main content area - Split view */}
@@ -65,7 +69,7 @@ export function JobDetails({ job }: JobDetailsProps) {
                   </div>
                   <Progress
                     value={progress}
-                    className={getStatusColor(job.status)}
+                    className={cn(getStatusColor(job.status))}
                   />
                 </div>
 
@@ -77,6 +81,14 @@ export function JobDetails({ job }: JobDetailsProps) {
                       <p className="text-sm text-muted-foreground">
                         {job.pipeline.description}
                       </p>
+                    </div>
+                    <div className="flex flex-row gap-2 items-center">
+                      <h3 className="text-sm font-medium">Run By: </h3>
+                      <div className="bg-muted rounded-lg p-2">
+                        <p className="text-sm text-muted-foreground">
+                          &quot;{job.runBy}&quot;
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -151,7 +163,7 @@ export function JobDetails({ job }: JobDetailsProps) {
                       pipelineId={job.ID.toString()}
                       disabled={job.status !== Status.Running}
                     >
-                      Stop Job
+                      <DrawerClose>Stop Job</DrawerClose>
                     </StopJobButton>
                   </div>
                 </div>

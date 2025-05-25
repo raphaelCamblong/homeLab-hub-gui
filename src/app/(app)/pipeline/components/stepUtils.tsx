@@ -45,6 +45,25 @@ export const getStatusColor = (status: Status) => {
   }
 };
 
+export const getStatusColorBgGradient = (status: Status) => {
+  switch (status) {
+    case Status.Completed:
+      return "from-green-pastel/20 via-green-pastel/10 to-transparent";
+    case Status.Running:
+      return "from-indigo-dye/20 via-indigo-dye/10 to-transparent";
+    case Status.Failed:
+      return "from-red-pastel/20 via-red-pastel/10 to-transparent";
+    case Status.Pending:
+      return "from-indigo-dye/20 via-indigo-dye/10 to-transparent";
+    case Status.Success:
+      return "from-green-pastel/20 via-green-pastel/10 to-transparent";
+    case Status.Stopped:
+      return "from-indigo-dye/20 via-indigo-dye/10 to-transparent";
+    default:
+      return "from-gray-500/20 via-gray-500/5 to-transparent";
+  }
+};
+
 export const getProgressPercentage = (steps: Step[]) => {
   if (!steps?.length) return 0;
   const completed = steps.filter(
